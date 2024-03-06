@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import {
   Text,
@@ -6,106 +5,131 @@ import {
   TouchableOpacity,
   Image,
   StyleSheet,
-  KeyboardAvoidingView,
-  Platform,
-  TouchableWithoutFeedback,
-  Keyboard,
+  TextInput,
+  ImageBackground,
+  SafeAreaView,
 } from "react-native";
 import LOGO from "../assets/LOGO Cleaning.png";
+import background from "../assets/sign up.png";
+import { Ionicons } from "@expo/vector-icons";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-import { TextInput } from "react-native-paper";
-
-const Signup = () => {
-
+const Signup = ({ navigation }) => {
   const [visible, setVisible] = useState(true);
 
   return (
-    <KeyboardAvoidingView
-    behavior="padding" keyboardVerticalOffset={Platform.OS==="ios"? 100:0}  
-      style={styles.container}
-    >
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={styles.inner}>
-          <Image style={styles.logo} source={LOGO} />
-          <Text className="font-bold text-2xl text-blue-800">Sign up</Text>
-          <TextInput required placeholder="Full name" style={styles.input} />
-          <TextInput type="number" required placeholder="CIN" style={styles.input} />
-          <TextInput
-            placeholder="Password"
-            style={styles.input}
-            secureTextEntry={visible}
-            right={
-              <TextInput.Icon
+    <SafeAreaView style={styles.container}>
+      <KeyboardAwareScrollView>
+        <ImageBackground
+          source={background}
+          resizeMode="cover"
+          className="flex-1 justify-center items-center"
+        >
+          <View style={styles.inner}>
+            <Image style={styles.logo} source={LOGO} />
+            <Text className="font-bold text-2xl text-blue-800 top-5">Sign up</Text>
+          </View>
+          <View className="flex-1 items-center h-screen w-96 p-6 rounded-xl left-4 top-4 gap-8">
+            <TextInput
+              required
+              placeholder="Full name"
+              className="rounded-2xl shadow-sm bg-white"
+              style={styles.input}
+            />
+            <TextInput
+              required
+              placeholder="Email"
+              className="rounded-2xl shadow-sm bg-white"
+              style={styles.input}
+            />
+            <View
+              className="rounded-2xl shadow-sm bg-white"
+              style={styles.input}
+            >
+              <TextInput placeholder="Password" secureTextEntry={visible} />
+              <TouchableOpacity
                 onPress={() => setVisible(!visible)}
-                icon={visible ? "eye-off" : "eye"}
-              />
-            }
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Confirm Password"
-            secureTextEntry={visible}
-            right={
-              <TextInput.Icon
-                onPress={() => setVisible(!visible)}
-                icon={visible ? "eye-off" : "eye"}
-              />
-            }
-          />
+                style={{ position: "absolute", right: 12 }}
+              >
+                {visible ? (
+                  <Ionicons name="eye-off" size={24} color={"black"} />
+                ) : (
+                  <Ionicons name="eye" size={24} color={"black"} />
+                )}
+              </TouchableOpacity>
+            </View>
 
-          <View style={styles.button}>
-            <TouchableOpacity>
+            <View
+              className="rounded-2xl shadow-sm bg-white"
+              style={styles.input}
+            >
+              <TextInput
+                placeholder="Confirm Password"
+                secureTextEntry={visible}
+              />
+              <TouchableOpacity
+                onPress={() => setVisible(!visible)}
+                style={{ position: "absolute", right: 12 }}
+              >
+                {visible ? (
+                  <Ionicons name="eye-off" size={24} color={"black"} />
+                ) : (
+                  <Ionicons name="eye" size={24} color={"black"} />
+                )}
+              </TouchableOpacity>
+            </View>
+
+            <TouchableOpacity
+              className="rounded-2xl shadow-sm"
+              style={styles.button}
+              onPress={() => navigation.navigate("Login")}
+            >
               <Text className="font-bold text-cyan-50 text-xl">Sign up</Text>
             </TouchableOpacity>
           </View>
-        </View>
-      </TouchableWithoutFeedback>
-    </KeyboardAvoidingView>
+        </ImageBackground>
+      </KeyboardAwareScrollView>
+    </SafeAreaView>
   );
- 
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#EFFFFD",
-height:100,
     width: "100%",
   },
   inner: {
-    padding: 40,
-    flex: 1,
-    justifyContent: "space-around",
-    alignItems: "center",
-    marginBottom:1
-  },
-  tinyLogo: {
-    width: 50,
-    height: 50,
+    marginTop: 110,
+    padding: 10,
   },
   logo: {
     width: 80,
     height: 80,
   },
   input: {
-    width: "90%",
+    width: "100%",
     height: 48,
-    borderRadius: 15,
     justifyContent: "center",
     paddingLeft: 22,
-    marginTop: 25,
-    backgroundColor: "#FFFFFF",
-    shadowColor: "#C8C4C440",
+    paddingRight: 40,
+    color: "#020E5F66",
+    right: 15,
+    shadowColor: "black",
+  },
+  inputContainer: {
+    backgroundColor: "#FFFFFFC0",
+    shadowColor: "gray",
   },
   button: {
-    width: "90%",
+    width: "100%",
     height: 48,
-    borderRadius: 15,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 36,
     backgroundColor: "#61D8D8",
-    shadowColor: "#C8C4C440",
+    marginTop: "10%",
+    right: 15,
+    shadowColor: "black",
   },
 });
 
