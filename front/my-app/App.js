@@ -2,8 +2,7 @@ import * as React from 'react';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-// import { Text } from 'react-native';
-import Signup from './screens/Home';
+import Signup from './screens/Signup';
 
 const Stack = createStackNavigator();
 export default function App() {
