@@ -21,5 +21,8 @@ const getEmployee=()=>{
 const createEmployee=(obj)=>{
   return Employee.create(obj)
 }
+const updateEmpoyeeteam=(obj,id)=> {
+  return Employee.update(obj, { where: {id:id} })
+};
 
-module.exports = {Employee,getEmployee,createEmployee};
+module.exports = {Employee,getEmployee,createEmployee,updateEmpoyeeteam};

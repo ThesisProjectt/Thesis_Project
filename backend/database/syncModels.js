@@ -41,4 +41,4 @@ Service.belongsToMany(Pack, { through: PackHasServices , foreignKey:"service_id"
 
 Employee.hasMany(Presence, {foreignKey: "employee_id"});
 
-sequelize.sync({ force: true })
+sequelize.sync()

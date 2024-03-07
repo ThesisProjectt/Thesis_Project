@@ -15,7 +15,16 @@ const postEmployee=async(req,res)=>{
         console.log("Error in creating Employee", err);
     }
 }
+const updateEmployeeteam=async(req,res)=>{
+try{
+    const x=await db.updateEmpoyeeteam(req.body,req.params.id)
+    res.status(204).json(x)
+}catch(err){
+    console.log("Error in updating Employee team", err);
+}
+}
 module.exports={
     getEmployee,
-    postEmployee
+    postEmployee,
+    updateEmployeeteam
 }
