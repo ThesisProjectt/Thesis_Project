@@ -15,5 +15,11 @@ const Employee = sequelize.define('Employee', {
   tableName: 'employee',
   timestamps: false
 });
+const getEmployee=()=>{
+  return Employee.findAll({})
+}
+const createEmployee=(obj)=>{
+  return Employee.create(obj)
+}
 
-module.exports = {Employee};
+module.exports = {Employee,getEmployee,createEmployee};

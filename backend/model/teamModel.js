@@ -15,5 +15,8 @@ const Team = sequelize.define('Team', {
   tableName: 'team',
   timestamps: false
 });
+const create=(obj)=>{
+  return Team.create(obj)
+}
 
-module.exports = {Team};
+module.exports = {Team,create};
