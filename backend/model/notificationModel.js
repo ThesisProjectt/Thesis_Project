@@ -18,5 +18,8 @@ const Notification = sequelize.define('Notification', {
   tableName: 'notification',
   timestamps: false
 });
+const createnot=(obj)=>{
+  return Notification.create(obj)
+}
 
-module.exports = {Notification};
+module.exports = {Notification,createnot};
