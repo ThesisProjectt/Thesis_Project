@@ -39,5 +39,8 @@ const Client = sequelize.define('Client', {
   tableName: 'client',
   timestamps: false
 });
+const getClient=()=>{
+  return Client.findAll({})
+}
 
-module.exports = {Client};
+module.exports = {Client ,getClient};
