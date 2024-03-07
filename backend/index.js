@@ -5,11 +5,16 @@ const express = require("express")
 const cors = require("cors")
 const PORT = process.env.PORT
 const app = express()
-
+const client=require('./router/clientRoute')
+const employee=require('./router/employeeRouter')
+const team=require('./router/teamRouter')
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded( { extended: true } ))
 
+app.use('/client',client)
+app.use('/employee',employee)
+app.use('/team',team)
 // app.use('/admin')
 // app.use('/user')
 // app.use('/payment')
