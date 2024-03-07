@@ -29,7 +29,7 @@ const NewPwd = ({ navigation }) => {
         <View style={styles.inner}>
           <Image style={styles.logo} source={LOGO} />
           <Image className="top-16" style={styles.logo} source={OK} />
-          <Text className="font-bold text-2xl w-64 text-center text-blue-800 top-20">
+          <Text style={{ fontFamily: 'Poppins' }} className="text-2xl w-64 text-center text-blue-800 top-20">
             Your password has been changed
           </Text>
         </View>

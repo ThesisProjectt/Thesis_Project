@@ -1,5 +1,5 @@
 import * as React from 'react';
-
+import { useFonts } from 'expo-font';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 // import { Text } from 'react-native';
@@ -11,7 +11,14 @@ import Forget from './screens/Forget';
 import NewPwd from './screens/NewPwd';
 
 const Stack = createStackNavigator();
+
 export default function App() {
+  
+  const [fontsLoaded] = useFonts({
+    'Poppins': require("./assets/fonts/Poppins-Bold.ttf"),
+  });
+  if (!fontsLoaded) { return null}
+
   return (
     <NavigationContainer>
       <Stack.Navigator >

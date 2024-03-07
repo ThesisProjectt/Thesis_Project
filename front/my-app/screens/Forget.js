@@ -30,16 +30,16 @@ const Forget = ({ navigation }) => {
       >
         <View style={styles.inner}>
           <Image style={styles.logo} source={LOGO} />
-          <Text className="font-bold text-2xl text-blue-800 top-5">New password</Text>
+          <Text style={{ fontFamily: 'Poppins' }} className="text-2xl text-blue-800 top-5">New password</Text>
         </View>
         <View className="flex-1 items-center h-screen w-96 p-6 rounded-xl left-4 top-4 gap-8">
           <TextInput
             required
             placeholder="Your e-mail address"
-            className="rounded-2xl shadow-sm bg-white"
+            className="rounded-2xl shadow-lg bg-white"
             style={styles.input}
           />
-          <View className="rounded-2xl shadow-sm bg-white" style={styles.input}>
+          <View className="rounded-2xl shadow-lg bg-white" style={styles.input}>
             <TextInput placeholder="New Password" secureTextEntry={visible} />
             <TouchableOpacity
               onPress={() => setVisible(!visible)}
@@ -52,7 +52,7 @@ const Forget = ({ navigation }) => {
               )}
             </TouchableOpacity>
           </View>
-          <View className="rounded-2xl shadow-sm bg-white" style={styles.input}>
+          <View className="rounded-2xl shadow-lg bg-white" style={styles.input}>
             <TextInput placeholder="Confirm Password" secureTextEntry={visible} />
             <TouchableOpacity
               onPress={() => setVisible(!visible)}
@@ -66,11 +66,11 @@ const Forget = ({ navigation }) => {
             </TouchableOpacity>
           </View>
           <TouchableOpacity
-            className="rounded-2xl shadow-sm"
+            className="rounded-2xl shadow-lg"
             style={styles.button}
             onPress={() => navigation.navigate("NewPwd")}
           >
-            <Text className="font-bold text-cyan-50 text-xl">Confirm</Text>
+            <Text style={{ fontFamily: 'Poppins' }} className="text-cyan-50 text-xl">Confirm</Text>
           </TouchableOpacity>
         </View>
       </ImageBackground>
