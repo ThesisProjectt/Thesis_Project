@@ -30,16 +30,16 @@ const Login = ({ navigation }) => {
       >
         <View style={styles.inner}>
           <Image style={styles.logo} source={LOGO} />
-          <Text className="font-bold text-2xl text-blue-800 top-5">Sign in</Text>
+          <Text style={{ fontFamily: 'Poppins' }} className="text-2xl text-blue-800 top-5">Sign in</Text>
         </View>
         <View className="flex-1 items-center h-screen w-96 p-6 rounded-xl left-4 gap-8">
           <TextInput
             required
             placeholder="Email"
-            className="rounded-2xl shadow-sm bg-white"
+            className="rounded-2xl shadow-lg bg-white"
             style={styles.input}
           />
-          <View className="rounded-2xl shadow-sm bg-white" style={styles.input}>
+          <View className="rounded-2xl shadow-lg bg-white" style={styles.input}>
             <TextInput placeholder="Password" secureTextEntry={visible} />
             <TouchableOpacity
               onPress={() => setVisible(!visible)}
@@ -54,25 +54,25 @@ const Login = ({ navigation }) => {
           </View>
 
           <TouchableOpacity
-            className="rounded-2xl shadow-sm"
+            className="rounded-2xl shadow-lg"
             style={styles.button}
             onPress={() => navigation.navigate("Home")}
           >
-            <Text className="font-bold text-cyan-50 text-xl">Sign in</Text>
+            <Text style={{ fontFamily: 'Poppins' }} className="text-cyan-50 text-xl">Sign in</Text>
           </TouchableOpacity>
 
-          <View className="flex-1 flex-row space-x-32 right-2">
+          <View className="flex-1 flex-row space-x-24 right-4">
             <TouchableOpacity
               className="h-12"
               onPress={() => navigation.navigate("Signup")}
             >
-              <Text className="text-lg text-teal-500">Sign up</Text>
+              <Text style={{ fontFamily: 'Poppins' }} className="text-lg text-teal-500">Sign up</Text>
             </TouchableOpacity>
             <TouchableOpacity
               className="h-12"
               onPress={() => navigation.navigate("Forget")}
             >
-              <Text className="text-lg text-teal-500">Forget password?</Text>
+              <Text style={{ fontFamily: 'Poppins' }} className="text-lg text-teal-500">Forget password?</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -88,6 +88,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   inner: {
+    alignItems: "center",
     marginTop: 110,
     padding: 10,
   },

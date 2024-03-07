@@ -13,9 +13,50 @@ import LOGO from "../assets/LOGO Cleaning.png";
 import background from "../assets/sign up.png";
 import { Ionicons } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import axios from "axios";
 
 const Signup = ({ navigation }) => {
   const [visible, setVisible] = useState(true);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState(null);
+
+  function validate() {
+    const pattern = /^[\w-.]+@[\w-]+\.[a-zA-Z]{2,}$/;
+    if (!pattern.test(email)) {
+      setError("Please enter a valid email address.")
+    } else if(password.length < 8) {
+      setError("Please enter a password of at least 8 characters");
+      return false;
+    } else if (!/\d/.test(password)) {
+      setError("Your password must contain a number");
+      return false;
+    } else if (!/[A-Z]/.test(password)) {
+      setError("Your password must contain at least one uppercase");
+      return false;
+    } else if (!/[a-z]/.test(password)) {
+      setError("Your password must contain lowercase letter");
+      return false;
+    } else if (password !== confirmPassword) {
+      setError("Passwords don't match");
+    } else {
+      setError(null);
+      return true;
+    }
+  }
+
+  const createAccount = async () => {
+    try {
+      const isValidated = validate()
+      if(isValidated){
+        navigation.navigate("Login")
+      }
+    } catch (e) {
+      setError("There was a problem creating your account");
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -27,45 +68,38 @@ const Signup = ({ navigation }) => {
         >
           <View style={styles.inner}>
             <Image style={styles.logo} source={LOGO} />
-            <Text className="font-bold text-2xl text-blue-800 top-5">Sign up</Text>
+            <Text
+              style={{ fontFamily: "Poppins" }}
+              className="text-2xl text-blue-800 top-5"
+            >
+              Sign up
+            </Text>
           </View>
           <View className="flex-1 items-center h-screen w-96 p-6 rounded-xl left-4 top-4 gap-8">
+          {error && <Text style={styles.inputError}>{error}</Text>}
             <TextInput
               required
               placeholder="Full name"
-              className="rounded-2xl shadow-sm bg-white"
+              className="rounded-2xl shadow-lg bg-white"
               style={styles.input}
+              onChangeText={(text) => setName(text)}
             />
             <TextInput
               required
               placeholder="Email"
-              className="rounded-2xl shadow-sm bg-white"
+              className="rounded-2xl shadow-lg bg-white"
               style={styles.input}
+              onChangeText={(text) => setEmail(text)}
             />
             <View
-              className="rounded-2xl shadow-sm bg-white"
-              style={styles.input}
-            >
-              <TextInput placeholder="Password" secureTextEntry={visible} />
-              <TouchableOpacity
-                onPress={() => setVisible(!visible)}
-                style={{ position: "absolute", right: 12 }}
-              >
-                {visible ? (
-                  <Ionicons name="eye-off" size={24} color={"black"} />
-                ) : (
-                  <Ionicons name="eye" size={24} color={"black"} />
-                )}
-              </TouchableOpacity>
-            </View>
-
-            <View
-              className="rounded-2xl shadow-sm bg-white"
+              className="rounded-2xl shadow-lg bg-white"
               style={styles.input}
             >
               <TextInput
-                placeholder="Confirm Password"
+                required
+                placeholder="Password"
                 secureTextEntry={visible}
+                onChangeText={(text) => setPassword(text)}
               />
               <TouchableOpacity
                 onPress={() => setVisible(!visible)}
@@ -79,12 +113,40 @@ const Signup = ({ navigation }) => {
               </TouchableOpacity>
             </View>
 
-            <TouchableOpacity
-              className="rounded-2xl shadow-sm"
-              style={styles.button}
-              onPress={() => navigation.navigate("Login")}
+            <View
+              className="rounded-2xl shadow-lg bg-white"
+              style={styles.input}
             >
-              <Text className="font-bold text-cyan-50 text-xl">Sign up</Text>
+              <TextInput
+                required
+                placeholder="Confirm Password"
+                secureTextEntry={visible}
+                onChangeText={(text) => setConfirmPassword(text)}
+              />
+              <TouchableOpacity
+                onPress={() => setVisible(!visible)}
+                style={{ position: "absolute", right: 12 }}
+              >
+                {visible ? (
+                  <Ionicons name="eye-off" size={24} color={"black"} />
+                ) : (
+                  <Ionicons name="eye" size={24} color={"black"} />
+                )}
+              </TouchableOpacity>
+            </View>
+            <TouchableOpacity
+              className="rounded-2xl shadow-lg"
+              style={styles.button}
+              onPress={() => {
+                createAccount();
+              }}
+            >
+              <Text
+                style={{ fontFamily: "Poppins" }}
+                className="text-cyan-50 text-xl"
+              >
+                Sign up
+              </Text>
             </TouchableOpacity>
           </View>
         </ImageBackground>
@@ -100,6 +162,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   inner: {
+    alignItems: "center",
     marginTop: 110,
     padding: 10,
   },
@@ -113,7 +176,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingLeft: 22,
     paddingRight: 40,
-    color: "#020E5F66",
+    color: "black",
     right: 15,
     shadowColor: "black",
   },
@@ -130,6 +193,11 @@ const styles = StyleSheet.create({
     marginTop: "10%",
     right: 15,
     shadowColor: "black",
+  },
+  inputError: {
+    color: "red",
+    paddingRight: 40,
+    textAlign:"center"
   },
 });
 
