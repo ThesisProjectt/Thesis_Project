@@ -21,40 +21,67 @@ const Signup = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [error, setError] = useState(null);
+  const [errorName, setErrorName] = useState(null);
+  const [errorEmail, setErrorEmail] = useState(null);
+  const [errorPwd, setErrorPwd] = useState(null);
 
   function validate() {
     const pattern = /^[\w-.]+@[\w-]+\.[a-zA-Z]{2,}$/;
-    if (!pattern.test(email)) {
-      setError("Please enter a valid email address.")
-    } else if(password.length < 8) {
-      setError("Please enter a password of at least 8 characters");
+    if(name === ""){
+      setErrorEmail(null);
+      setErrorName("Please enter your name.")
+      return false;
+    }else if (!pattern.test(email)) {
+      setErrorName(null)
+      setErrorEmail("Please enter a valid email address.");
+      return false;
+    } else if (password.length < 8) {
+      setErrorName(null)
+      setErrorEmail(null);
+      setErrorPwd("Please enter a password of at least 8 characters");
       return false;
     } else if (!/\d/.test(password)) {
-      setError("Your password must contain a number");
+      setErrorName(null)
+      setErrorEmail(null);
+      setErrorPwd("Your password must contain a number");
       return false;
     } else if (!/[A-Z]/.test(password)) {
-      setError("Your password must contain at least one uppercase");
+      setErrorName(null)
+      setErrorEmail(null);
+      setErrorPwd("Your password must contain at least one uppercase");
       return false;
     } else if (!/[a-z]/.test(password)) {
-      setError("Your password must contain lowercase letter");
+      setErrorName(null)
+      setErrorEmail(null);
+      setErrorPwd("Your password must contain lowercase letter");
       return false;
     } else if (password !== confirmPassword) {
-      setError("Passwords don't match");
+      setErrorName(null)
+      setErrorEmail(null);
+      setErrorPwd("Passwords don't match");
     } else {
-      setError(null);
+      setErrorPwd(null);
+      setErrorName(null)
+      setErrorEmail(null);
       return true;
     }
   }
 
   const createAccount = async () => {
     try {
-      const isValidated = validate()
-      if(isValidated){
+      const isValidated = validate();
+      const data = {
+        fullName: name,
+        email: email,
+        password: password,
+      };
+      if (isValidated) {
+        await axios.post("http://192.168.1.45:3000/client/signup", data)
+        console.log('done')
         navigation.navigate("Login")
       }
     } catch (e) {
-      setError("There was a problem creating your account");
+      setErrorEmail("This email has already been used.");
     }
   };
 
@@ -76,7 +103,6 @@ const Signup = ({ navigation }) => {
             </Text>
           </View>
           <View className="flex-1 items-center h-screen w-96 p-6 rounded-xl left-4 top-4 gap-8">
-          {error && <Text style={styles.inputError}>{error}</Text>}
             <TextInput
               required
               placeholder="Full name"
@@ -84,6 +110,7 @@ const Signup = ({ navigation }) => {
               style={styles.input}
               onChangeText={(text) => setName(text)}
             />
+            {errorName && <Text style={styles.inputError}>{errorName}</Text>}
             <TextInput
               required
               placeholder="Email"
@@ -91,6 +118,7 @@ const Signup = ({ navigation }) => {
               style={styles.input}
               onChangeText={(text) => setEmail(text)}
             />
+            {errorEmail && <Text style={styles.inputError}>{errorEmail}</Text>}
             <View
               className="rounded-2xl shadow-lg bg-white"
               style={styles.input}
@@ -112,7 +140,7 @@ const Signup = ({ navigation }) => {
                 )}
               </TouchableOpacity>
             </View>
-
+            {errorPwd && <Text style={styles.inputError}>{errorPwd}</Text>}
             <View
               className="rounded-2xl shadow-lg bg-white"
               style={styles.input}
@@ -148,6 +176,19 @@ const Signup = ({ navigation }) => {
                 Sign up
               </Text>
             </TouchableOpacity>
+            <View className="flex-1 flex-row right-4">
+            <Text style={{ fontFamily: 'Poppins' }} className="text-lg text-teal-500">Already have an account,{" "}</Text>
+            <TouchableOpacity
+              className="h-12"
+              onPress={() => {
+                setErrorEmail(null)
+                setErrorName(null)
+                setErrorPwd(null)
+                navigation.navigate("Login")}}
+            >
+              <Text style={{ fontFamily: 'Poppins' }} className="text-lg underline text-teal-500">Sign in</Text>
+            </TouchableOpacity>
+          </View>
           </View>
         </ImageBackground>
       </KeyboardAwareScrollView>
@@ -196,8 +237,10 @@ const styles = StyleSheet.create({
   },
   inputError: {
     color: "red",
-    paddingRight: 40,
-    textAlign:"center"
+    textAlign: "center",
+    fontFamily:"Poppins",
+    fontSize: 13,
+    position:'absolute'
   },
 });
 

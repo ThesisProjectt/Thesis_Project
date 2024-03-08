@@ -17,10 +17,33 @@ import {
 import LOGO from "../assets/LOGO Cleaning.png";
 import background from "../assets/sign in.png";
 import { Ionicons } from "@expo/vector-icons";
+import axios from "axios";
 
 const Login = ({ navigation }) => {
   const [visible, setVisible] = useState(true);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
 
+  const handleSubmit = async () => { 
+     if (!email || !password ) {
+       return setError('Please enter both email and password');
+     }
+     const data = {email: email, password: password};
+      try{
+     await axios.post("http://192.168.1.45:3000/client/login", data)
+     .then((response)=>{
+      setError(null)
+        alert(response.data.message);
+         //navigation.navigate('Home', response.data);
+         alert("Logged In Successfully!");
+        //  navigation.replace("Home", {token : response.data.token});
+     }).catch((err)=>setError("Invalid  Email or Password"));
+    }
+    catch(err){
+        console.error(err);
+  }
+}
   return (
     <SafeAreaView style={styles.container}>
       <ImageBackground
@@ -30,17 +53,28 @@ const Login = ({ navigation }) => {
       >
         <View style={styles.inner}>
           <Image style={styles.logo} source={LOGO} />
-          <Text style={{ fontFamily: 'Poppins' }} className="text-2xl text-blue-800 top-5">Sign in</Text>
+          <Text
+            style={{ fontFamily: "Poppins" }}
+            className="text-2xl text-blue-800 top-5"
+          >
+            Sign in
+          </Text>
         </View>
-        <View className="flex-1 items-center h-screen w-96 p-6 rounded-xl left-4 gap-8">
+        <View className="flex-1 items-center h-screen w-96 p-6 rounded-xl left-4 top-4 gap-8">
           <TextInput
             required
             placeholder="Email"
             className="rounded-2xl shadow-lg bg-white"
             style={styles.input}
+            onChangeText={(text) => setEmail(text)}
           />
           <View className="rounded-2xl shadow-lg bg-white" style={styles.input}>
-            <TextInput placeholder="Password" secureTextEntry={visible} />
+            <TextInput
+              required
+              placeholder="Password"
+              secureTextEntry={visible}
+              onChangeText={(text) => setPassword(text)}
+            />
             <TouchableOpacity
               onPress={() => setVisible(!visible)}
               style={{ position: "absolute", right: 12 }}
@@ -52,13 +86,18 @@ const Login = ({ navigation }) => {
               )}
             </TouchableOpacity>
           </View>
-
+          {error && <Text style={styles.inputError}>{error}</Text>}
           <TouchableOpacity
             className="rounded-2xl shadow-lg"
             style={styles.button}
-            onPress={() => navigation.navigate("Home")}
+            onPress={() =>  handleSubmit()}
           >
-            <Text style={{ fontFamily: 'Poppins' }} className="text-cyan-50 text-xl">Sign in</Text>
+            <Text
+              style={{ fontFamily: "Poppins" }}
+              className="text-cyan-50 text-xl"
+            >
+              Sign in
+            </Text>
           </TouchableOpacity>
 
           <View className="flex-1 flex-row space-x-24 right-4">
@@ -66,13 +105,23 @@ const Login = ({ navigation }) => {
               className="h-12"
               onPress={() => navigation.navigate("Signup")}
             >
-              <Text style={{ fontFamily: 'Poppins' }} className="text-lg text-teal-500">Sign up</Text>
+              <Text
+                style={{ fontFamily: "Poppins" }}
+                className="text-lg text-teal-500"
+              >
+                Sign up
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
               className="h-12"
               onPress={() => navigation.navigate("Forget")}
             >
-              <Text style={{ fontFamily: 'Poppins' }} className="text-lg text-teal-500">Forget password?</Text>
+              <Text
+                style={{ fontFamily: "Poppins" }}
+                className="text-lg text-teal-500"
+              >
+                Forget password?
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -101,7 +150,8 @@ const styles = StyleSheet.create({
     height: 48,
     justifyContent: "center",
     paddingLeft: 22,
-    color: "#020E5F66",
+    paddingRight: 40,
+    color: "black",
     right: 15,
     shadowColor: "black",
   },
@@ -118,6 +168,13 @@ const styles = StyleSheet.create({
     marginTop: "10%",
     right: 15,
     shadowColor: "black",
+  },
+  inputError: {
+    color: "red",
+    textAlign: "center",
+    fontFamily:"Poppins",
+    fontSize: 13,
+    position:'absolute'
   },
 });
 

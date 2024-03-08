@@ -2,7 +2,6 @@ import * as React from 'react';
 import { useFonts } from 'expo-font';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-// import { Text } from 'react-native';
 
 import Catego from './screens/Catego';
 import Signup from './screens/Signup';
@@ -22,8 +21,8 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator >
-        <Stack.Screen name='Categories' component={Catego} options={{headerShown:false}}/>
         <Stack.Screen name='Signup' component={Signup} options={{headerShown:false}}/>
+        <Stack.Screen name='Categories' component={Catego} options={{headerShown:false}}/>
         <Stack.Screen name='Login' component={Login} options={{headerShown:false}}/>
         <Stack.Screen name='Forget' component={Forget} options={{headerShown:false}}/>
         <Stack.Screen name='NewPwd' component={NewPwd} options={{headerShown:false}}/>
