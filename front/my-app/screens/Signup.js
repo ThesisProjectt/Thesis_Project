@@ -25,9 +25,13 @@ const Signup = ({ navigation }) => {
 
   function validate() {
     const pattern = /^[\w-.]+@[\w-]+\.[a-zA-Z]{2,}$/;
-    if (!pattern.test(email)) {
-      setError("Please enter a valid email address.")
-    } else if(password.length < 8) {
+    if(name === ""){
+      setError("Please enter your name.")
+      return false;
+    }else if (!pattern.test(email)) {
+      setError("Please enter a valid email address.");
+      return false;
+    } else if (password.length < 8) {
       setError("Please enter a password of at least 8 characters");
       return false;
     } else if (!/\d/.test(password)) {
@@ -49,12 +53,19 @@ const Signup = ({ navigation }) => {
 
   const createAccount = async () => {
     try {
-      const isValidated = validate()
-      if(isValidated){
-        navigation.navigate("Login")
+      const isValidated = validate();
+      const data = {
+        fullName: name,
+        email: email,
+        password: password,
+      };
+      if (isValidated) {
+        await axios.post("http://192.168.1.45:3000/client/signup", data)
+        console.log('done')
+        navigation.replace("Login")
       }
     } catch (e) {
-      setError("There was a problem creating your account");
+      setError("This email has already been used.");
     }
   };
 
@@ -76,7 +87,7 @@ const Signup = ({ navigation }) => {
             </Text>
           </View>
           <View className="flex-1 items-center h-screen w-96 p-6 rounded-xl left-4 top-4 gap-8">
-          {error && <Text style={styles.inputError}>{error}</Text>}
+            {error && <Text style={styles.inputError}>{error}</Text>}
             <TextInput
               required
               placeholder="Full name"
@@ -112,7 +123,6 @@ const Signup = ({ navigation }) => {
                 )}
               </TouchableOpacity>
             </View>
-
             <View
               className="rounded-2xl shadow-lg bg-white"
               style={styles.input}
@@ -148,6 +158,16 @@ const Signup = ({ navigation }) => {
                 Sign up
               </Text>
             </TouchableOpacity>
+            <View className="flex-1 flex-row right-4">
+            <Text style={{ fontFamily: 'Poppins' }} className="text-md text-teal-500">Already have an account,{" "}</Text>
+            <TouchableOpacity
+              className="h-12"
+              onPress={() => {
+                navigation.navigate("Login")}}
+            >
+              <Text style={{ fontFamily: 'Poppins' }} className="text-md underline text-teal-500">Sign in</Text>
+            </TouchableOpacity>
+          </View>
           </View>
         </ImageBackground>
       </KeyboardAwareScrollView>
@@ -196,8 +216,10 @@ const styles = StyleSheet.create({
   },
   inputError: {
     color: "red",
-    paddingRight: 40,
-    textAlign:"center"
+    textAlign: "center",
+    fontFamily:"Poppins",
+    fontSize: 13,
+    position:'absolute'
   },
 });
 
