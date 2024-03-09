@@ -5,11 +5,6 @@ import {
   TouchableOpacity,
   Image,
   StyleSheet,
-  KeyboardAvoidingView,
-  keyboardVerticalOffset,
-  Platform,
-  TouchableWithoutFeedback,
-  Keyboard,
   SafeAreaView,
   ImageBackground,
   TextInput,
@@ -18,6 +13,7 @@ import LOGO from "../assets/LOGO Cleaning.png";
 import background from "../assets/sign in.png";
 import { Ionicons } from "@expo/vector-icons";
 import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Login = ({ navigation }) => {
   const [visible, setVisible] = useState(true);
@@ -25,25 +21,28 @@ const Login = ({ navigation }) => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
 
-  const handleSubmit = async () => { 
-     if (!email || !password ) {
-       return setError('Please enter both email and password');
-     }
-     const data = {email: email, password: password};
-      try{
-     await axios.post("http://192.168.1.45:3000/client/login", data)
-     .then((response)=>{
-      setError(null)
-        alert(response.data.message);
-         //navigation.navigate('Home', response.data);
-         alert("Logged In Successfully!");
-        //  navigation.replace("Home", {token : response.data.token});
-     }).catch((err)=>setError("Invalid  Email or Password"));
+  const handleSubmit = async () => {
+    if (!email || !password) {
+      return setError("Please enter both email and password");
     }
-    catch(err){
-        console.error(err);
-  }
-}
+    const data = { email: email, password: password };
+    try {
+      await axios.post("http://192.168.1.45:3000/client/login", data)
+        .then(async (response) => {
+          setError(null);
+          const token = response.headers["token"]
+          const user = response.data
+          await AsyncStorage.setItem("token", JSON.stringify(token));
+          await AsyncStorage.setItem("user", JSON.stringify(user));
+
+          alert("Logged In Successfully!");
+           navigation.replace("HomePage");
+        })
+        .catch(() => setError("Invalid  Email or Password"));
+    } catch (err) {
+      console.error(err);
+    }
+  };
   return (
     <SafeAreaView style={styles.container}>
       <ImageBackground
@@ -90,7 +89,7 @@ const Login = ({ navigation }) => {
           <TouchableOpacity
             className="rounded-2xl shadow-lg"
             style={styles.button}
-            onPress={() =>  handleSubmit()}
+            onPress={() => handleSubmit()}
           >
             <Text
               style={{ fontFamily: "Poppins" }}
@@ -172,9 +171,9 @@ const styles = StyleSheet.create({
   inputError: {
     color: "red",
     textAlign: "center",
-    fontFamily:"Poppins",
+    fontFamily: "Poppins",
     fontSize: 13,
-    position:'absolute'
+    position: "absolute",
   },
 });
 

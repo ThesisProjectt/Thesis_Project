@@ -21,48 +21,32 @@ const Signup = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [errorName, setErrorName] = useState(null);
-  const [errorEmail, setErrorEmail] = useState(null);
-  const [errorPwd, setErrorPwd] = useState(null);
+  const [error, setError] = useState(null);
 
   function validate() {
     const pattern = /^[\w-.]+@[\w-]+\.[a-zA-Z]{2,}$/;
     if(name === ""){
-      setErrorEmail(null);
-      setErrorName("Please enter your name.")
+      setError("Please enter your name.")
       return false;
     }else if (!pattern.test(email)) {
-      setErrorName(null)
-      setErrorEmail("Please enter a valid email address.");
+      setError("Please enter a valid email address.");
       return false;
     } else if (password.length < 8) {
-      setErrorName(null)
-      setErrorEmail(null);
-      setErrorPwd("Please enter a password of at least 8 characters");
+      setError("Please enter a password of at least 8 characters");
       return false;
     } else if (!/\d/.test(password)) {
-      setErrorName(null)
-      setErrorEmail(null);
-      setErrorPwd("Your password must contain a number");
+      setError("Your password must contain a number");
       return false;
     } else if (!/[A-Z]/.test(password)) {
-      setErrorName(null)
-      setErrorEmail(null);
-      setErrorPwd("Your password must contain at least one uppercase");
+      setError("Your password must contain at least one uppercase");
       return false;
     } else if (!/[a-z]/.test(password)) {
-      setErrorName(null)
-      setErrorEmail(null);
-      setErrorPwd("Your password must contain lowercase letter");
+      setError("Your password must contain lowercase letter");
       return false;
     } else if (password !== confirmPassword) {
-      setErrorName(null)
-      setErrorEmail(null);
-      setErrorPwd("Passwords don't match");
+      setError("Passwords don't match");
     } else {
-      setErrorPwd(null);
-      setErrorName(null)
-      setErrorEmail(null);
+      setError(null);
       return true;
     }
   }
@@ -78,10 +62,10 @@ const Signup = ({ navigation }) => {
       if (isValidated) {
         await axios.post("http://192.168.1.45:3000/client/signup", data)
         console.log('done')
-        navigation.navigate("Login")
+        navigation.replace("Login")
       }
     } catch (e) {
-      setErrorEmail("This email has already been used.");
+      setError("This email has already been used.");
     }
   };
 
@@ -103,6 +87,7 @@ const Signup = ({ navigation }) => {
             </Text>
           </View>
           <View className="flex-1 items-center h-screen w-96 p-6 rounded-xl left-4 top-4 gap-8">
+            {error && <Text style={styles.inputError}>{error}</Text>}
             <TextInput
               required
               placeholder="Full name"
@@ -110,7 +95,6 @@ const Signup = ({ navigation }) => {
               style={styles.input}
               onChangeText={(text) => setName(text)}
             />
-            {errorName && <Text style={styles.inputError}>{errorName}</Text>}
             <TextInput
               required
               placeholder="Email"
@@ -118,7 +102,6 @@ const Signup = ({ navigation }) => {
               style={styles.input}
               onChangeText={(text) => setEmail(text)}
             />
-            {errorEmail && <Text style={styles.inputError}>{errorEmail}</Text>}
             <View
               className="rounded-2xl shadow-lg bg-white"
               style={styles.input}
@@ -140,7 +123,6 @@ const Signup = ({ navigation }) => {
                 )}
               </TouchableOpacity>
             </View>
-            {errorPwd && <Text style={styles.inputError}>{errorPwd}</Text>}
             <View
               className="rounded-2xl shadow-lg bg-white"
               style={styles.input}
@@ -181,9 +163,6 @@ const Signup = ({ navigation }) => {
             <TouchableOpacity
               className="h-12"
               onPress={() => {
-                setErrorEmail(null)
-                setErrorName(null)
-                setErrorPwd(null)
                 navigation.navigate("Login")}}
             >
               <Text style={{ fontFamily: 'Poppins' }} className="text-md underline text-teal-500">Sign in</Text>

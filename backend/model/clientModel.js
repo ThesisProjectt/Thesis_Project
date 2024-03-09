@@ -53,10 +53,6 @@ const addClient = (data) => {
   return Client.create(data)
 }
 
-const comparePassword = (email, password) => {
-  return Client.findOne ({ where : { email : email, password: password}})
-}
-
 const changePass = (email, password) => {
   return  Client.update({password: password},{where:{email}});
 }
@@ -66,6 +62,5 @@ module.exports = {
   getClient, 
   addClient, 
   findOneClient, 
-  comparePassword,
   changePass
 };

@@ -48,13 +48,13 @@ const login = async (req, res) => {
     if (!validPassword) {
       return res.status(401).json("Invalid Password!");
     }
-    const token = jwt.sign({ userId: results.id }, secretKey, { expiresIn: "3h" });
+    const token = jwt.sign({ userId: results.id, name: results.fullName }, secretKey, { expiresIn: "3h" });
     delete results.password;
-    res.status(200).json({
+    res.status(200).header("token", `${token}`).json({
         message: `Welcome ${results.fullName}`,
-        token: token,
         id: results.id
-      });
+      })
+      
   } catch (err) {
     console.log("Error in Login", err);
     res.status(500).json({ message: "Internal Server Error" });

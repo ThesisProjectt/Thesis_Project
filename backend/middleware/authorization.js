@@ -4,7 +4,7 @@ const checkToken = (req, res, next) => {
   const header = req.headers["authorization"];
   if (typeof header !== "undefined") {
     const bearer = header.split(" ");
-    const token = bearer[1];
+    const token = bearer[0];
     if (!token) {
       return res.status(401).json({ message: "Unauthorized" });
     } else {
@@ -12,10 +12,13 @@ const checkToken = (req, res, next) => {
         if (err) {
           return res.status(403).json({ message: "Forbidden" });
         }
+        console.log(req.user, "before");
         req.user = user;
+        console.log(req.user, "after");
         next();
       });
     }
   }
+  else return res.status(401).json({ message: "Unauthorized" });
 };
 module.exports = { checkToken };
