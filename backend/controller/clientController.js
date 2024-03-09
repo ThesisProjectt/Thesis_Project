@@ -61,8 +61,21 @@ const login = async (req, res) => {
   }
 };
 
+const changePassword = async (req, res) => {
+  const {email, password} = req.body;
+  const hashed = await bcrypt.hash(password, 10);
+  try{
+    await db.changePass(email, hashed);
+    res.status(200).json('Successfully changed your password');
+  }
+  catch(err){
+    res.status(500).json(err)
+  };
+};
+
 module.exports = {
   getClient,
   signUp,
   login,
+  changePassword
 };

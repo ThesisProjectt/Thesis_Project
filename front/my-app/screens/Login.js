@@ -107,7 +107,7 @@ const Login = ({ navigation }) => {
             >
               <Text
                 style={{ fontFamily: "Poppins" }}
-                className="text-lg text-teal-500"
+                className="text-md underline text-teal-500"
               >
                 Sign up
               </Text>
@@ -118,7 +118,7 @@ const Login = ({ navigation }) => {
             >
               <Text
                 style={{ fontFamily: "Poppins" }}
-                className="text-lg text-teal-500"
+                className="text-md underline text-teal-500"
               >
                 Forget password?
               </Text>

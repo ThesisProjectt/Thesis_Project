@@ -177,7 +177,7 @@ const Signup = ({ navigation }) => {
               </Text>
             </TouchableOpacity>
             <View className="flex-1 flex-row right-4">
-            <Text style={{ fontFamily: 'Poppins' }} className="text-lg text-teal-500">Already have an account,{" "}</Text>
+            <Text style={{ fontFamily: 'Poppins' }} className="text-md text-teal-500">Already have an account,{" "}</Text>
             <TouchableOpacity
               className="h-12"
               onPress={() => {
@@ -186,7 +186,7 @@ const Signup = ({ navigation }) => {
                 setErrorPwd(null)
                 navigation.navigate("Login")}}
             >
-              <Text style={{ fontFamily: 'Poppins' }} className="text-lg underline text-teal-500">Sign in</Text>
+              <Text style={{ fontFamily: 'Poppins' }} className="text-md underline text-teal-500">Sign in</Text>
             </TouchableOpacity>
           </View>
           </View>
