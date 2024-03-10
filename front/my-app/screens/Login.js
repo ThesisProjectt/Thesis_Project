@@ -36,7 +36,7 @@ const Login = ({ navigation }) => {
           await AsyncStorage.setItem("user", JSON.stringify(user));
 
           alert("Logged In Successfully!");
-           navigation.replace("HomePage");
+           navigation.replace("Home");
         })
         .catch(() => setError("Invalid  Email or Password"));
     } catch (err) {

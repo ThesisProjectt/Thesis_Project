@@ -11,21 +11,39 @@ import Forget from './screens/Forget';
 import NewPwd from './screens/NewPwd';
 import FirstScreen from "./screens/firstScreen";
 import HomePage from './screens/HomePage';
+import Avatar from './functions/Avatar';
 
 const Stack = createStackNavigator();
 
 export default function App() {
-  
+
   const [fontsLoaded] = useFonts({
     'Poppins': require("./assets/fonts/Poppins-Bold.ttf"),
+    'Poppins-Regular':require('./assets/fonts/Poppins-Regular.ttf'),
+    'Poppins-Light':require('./assets/fonts/Poppins-Light.ttf')
   });
   if (!fontsLoaded) { return null}
+
+  const option = {
+    headerShown:true, 
+    headerTitleAlign: "center", 
+    headerLeft: false, 
+    headerRight: (props) => <Avatar {...props} />,
+    headerTransparent: true,
+    headerStyle: {
+      height: 130,
+    },
+    headerTitleStyle: {
+      fontFamily:'Poppins',
+    },
+    headerTintColor: "gray"
+  }
 
   return (
     <NavigationContainer>
       <Stack.Navigator >
         <Stack.Screen name='FirstScreen' component={FirstScreen} options={{headerShown:false}}/>
-        {/* <Stack.Screen name='HomePage' component={HomePage} options={{headerShown:true, headerTitleAlign: "center", headerLeft: false}}/> */}
+        <Stack.Screen name='Home' component={HomePage} options={option}/>
         <Stack.Screen name='Signup' component={Signup} options={{headerShown:false}} />
         <Stack.Screen name='Categories' component={Catego} options={{headerShown:false}}/>
         <Stack.Screen name='Login' component={Login} options={{headerShown:false}}/>
@@ -34,4 +52,5 @@ export default function App() {
       </Stack.Navigator>
     </NavigationContainer>
   );
+
 }

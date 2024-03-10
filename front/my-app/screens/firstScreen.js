@@ -4,16 +4,17 @@ import {
     ImageBackground,
     SafeAreaView,
     StyleSheet,
-  } from "react-native";
-  import React from "react";
-  import { useEffect } from "react";
-  import LOGO from "../assets/LOGO Cleaning.png";
-  import background from "../assets/landing page.png";
-  
-  const FirstScreen = ({ navigation }) => {
+} from "react-native";
+import { useEffect } from "react";
+import LOGO from "../assets/LOGO Cleaning.png";
+import background from "../assets/landing page.png";
+import { useFonts } from 'expo-font';
+
+const FirstScreen = ({ navigation }) => {
+
     useEffect(() => {
       setTimeout(() => {
-        navigation.navigate("Login");
+        navigation.navigate("Home");
       }, 3000);
     }, []);
   
