@@ -60,7 +60,7 @@ const Signup = ({ navigation }) => {
         password: password,
       };
       if (isValidated) {
-        await axios.post("http://192.168.1.45:3000/client/signup", data)
+        await axios.post("http://192.168.11.38:3000/client/signup", data)
         console.log('done')
         navigation.replace("Login")
       }
@@ -71,7 +71,7 @@ const Signup = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <KeyboardAwareScrollView>
+      <KeyboardAwareScrollView keyboardShouldPersistTaps="never">
         <ImageBackground
           source={background}
           resizeMode="cover"
