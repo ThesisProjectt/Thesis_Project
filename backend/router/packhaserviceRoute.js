@@ -3,7 +3,7 @@ const packhasRoute = require('../controller/packhaservices')
 
 router.get('/getAllPacks',packhasRoute.getAllPacks)
 router.get('/getOnePack/:id',packhasRoute.getOnePack)
-
+// router.get('/getservives/:id',packhasRoute.find)
 router.post('/addAPack',packhasRoute.add)
 // router.put('/updateThisPack/:id',packhasRoute.updateThisPack)
 router.put('/updateThisPack',packhasRoute.updateService)

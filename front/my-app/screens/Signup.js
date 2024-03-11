@@ -20,7 +20,7 @@ const Signup = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAwareScrollView>
-        <ImageBackground
+        {/* <ImageBackground
           source={background}
           resizeMode="cover"
           className="flex-1 justify-center items-center"
@@ -87,7 +87,8 @@ const Signup = ({ navigation }) => {
               <Text className="font-bold text-cyan-50 text-xl">Sign up</Text>
             </TouchableOpacity>
           </View>
-        </ImageBackground>
+        </ImageBackground> */}
+        <Text> test </Text>
       </KeyboardAwareScrollView>
     </SafeAreaView>
   );

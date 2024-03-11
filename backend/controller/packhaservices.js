@@ -1,6 +1,6 @@
 const db = require('../model/packHasServicesModel') 
 // const db = require ('../database/index') 
-
+const {Service} = require('../model/servicesModel')
 module.exports = {
     add : async (req,res) => {
        try{
@@ -65,6 +65,8 @@ module.exports = {
         res.json(updated)
       }
       catch(error){console.log(error)}
-    }
+    },
+
+   
 }
 

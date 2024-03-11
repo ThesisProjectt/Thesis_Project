@@ -1,4 +1,5 @@
 const { Sequelize } = require("sequelize")
+
 require("dotenv").config()
 const host = process.env.HOST
 const database = process.env.DATABASE
@@ -12,7 +13,9 @@ const sequelize = new Sequelize(database, username, pwd, {
 
 sequelize.authenticate()
 .then(()=>{
+  
     console.log('Connection has been established!')
+
 })
 .catch((error)=> {
     console.error('Unable to connect to the database:', error)

@@ -1,6 +1,6 @@
 const db = require('../model/servicesModel') 
 // const db = require ('../database/index') 
-
+// const {PackHasServices} = require('../model/packHasServicesModel')
 module.exports = {
     add : async (req,res) => {
        try{
@@ -49,6 +49,21 @@ module.exports = {
             res.json(deleted)
         }
         catch(error){console.log("error")}
-    }
+    },
+    find: async(req,res)=>{
+      try{
+        const found = await db.Service.findAll({ where: {
+          category_id: req.params.id
+        },include: {
+          model: PackHasServices,
+         
+      },
+          
+          
+      })
+         res.json(found)
+      }
+      catch(error){console.log(error)}
+    },
 }
 
