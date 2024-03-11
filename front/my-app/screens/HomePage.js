@@ -7,14 +7,13 @@ import {
   SafeAreaView,
   Image,
   TouchableOpacity,
-  Pressable,
-  Touchable,
-  Button,
+  ScrollView,
+  StatusBar,
+  Dimensions,
 } from "react-native";
 import homepage from "../assets/homepage 1.png";
+import homepage2 from "../assets/50%off.png";
 import imageData from "../functions/Categories";
-import test from "../assets/residentials.png";
-import { TouchableOpacityBase } from "react-native";
 
 const HomePage = () => {
   const Item = ({ image, title }) => (
@@ -22,7 +21,6 @@ const HomePage = () => {
       <View style={styles.card}>
         <Image source={image} style={styles.flatImage} />
       </View>
-      {console.log(image)}
       <Text style={{ fontFamily: "Poppins" }} className="text-lg text-blue-700">
         {title}
       </Text>
@@ -30,9 +28,11 @@ const HomePage = () => {
   );
 
   return (
-    <View style={styles.container} className=" pl-1 pr-1 pt-32">
-      <Image source={homepage} style={styles.image} />
-      <View className="flex-1 flex-row justify-between p-7">
+    <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
+      <View className="items-center">
+        <Image source={homepage} style={styles.image} />
+      </View>
+      <View className="flex-1 flex-row justify-between pl-7 pr-7 pt-5">
         <Text
           style={{ fontFamily: "Poppins" }}
           className="text-2xl text-blue-800"
@@ -48,9 +48,11 @@ const HomePage = () => {
           </Text>
         </TouchableOpacity>
       </View>
-      <SafeAreaView className="flex-1 ml-4 mr-4 -mt-96">
+      <SafeAreaView className="flex-1 ml-4 mr-4">
         <FlatList
           horizontal
+          showsHorizontalScrollIndicator={false}
+          alwaysBounceHorizontal
           data={imageData}
           renderItem={({ item }) => (
             <Item image={item.image} title={item.title} />
@@ -58,25 +60,41 @@ const HomePage = () => {
           keyExtractor={(item) => item.id}
         />
       </SafeAreaView>
-    </View>
+        <Text
+          style={{ fontFamily: "Poppins" }}
+          className="text-2xl text-blue-800 pl-7 pt-5"
+        >
+          Special Offer
+        </Text>
+      <View className=" -mt-9 items-center">
+        <Image source={homepage2} style={styles.image2} />
+      </View>
+      <View style={{ height: 150, backgroundColor: "#EFFFFD" }}></View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 1,
     backgroundColor: "#EFFFFD",
+    paddingTop: StatusBar.currentHeight + 80,
   },
   item: {
     width: 150,
-    height: 150,
+    height: 180,
     alignItems: "center",
     gap: 10,
-    // justifyContent: "space-evenly",
+    justifyContent: "center",
   },
   image: {
-    width: 380,
-    height: 220,
+    width: 390,
+    height: 240,
+  },
+  image2: {
+    marginTop: 50,
+    width: 360,
+    height: 175,
+    borderRadius: 16,
   },
   card: {
     justifyContent: "center",

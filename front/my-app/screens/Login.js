@@ -27,7 +27,7 @@ const Login = ({ navigation }) => {
     }
     const data = { email: email, password: password };
     try {
-      await axios.post("http://192.168.1.45:3000/client/login", data)
+      await axios.post("http://192.168.1.15:3000/client/login", data)
         .then(async (response) => {
           setError(null);
           const token = response.headers["token"]
@@ -36,7 +36,7 @@ const Login = ({ navigation }) => {
           await AsyncStorage.setItem("user", JSON.stringify(user));
 
           alert("Logged In Successfully!");
-           navigation.replace("Home");
+           navigation.replace("BottomNav");
         })
         .catch(() => setError("Invalid  Email or Password"));
     } catch (err) {

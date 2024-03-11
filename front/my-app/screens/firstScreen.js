@@ -8,13 +8,12 @@ import {
 import { useEffect } from "react";
 import LOGO from "../assets/LOGO Cleaning.png";
 import background from "../assets/landing page.png";
-import { useFonts } from 'expo-font';
 
 const FirstScreen = ({ navigation }) => {
 
     useEffect(() => {
       setTimeout(() => {
-        navigation.navigate("Home");
+        navigation.navigate("Login");
       }, 3000);
     }, []);
   
