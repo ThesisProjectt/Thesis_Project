@@ -23,5 +23,8 @@ const Supervisor = sequelize.define('Supervisor', {
   tableName: 'supervisor',
   timestamps: false
 });
+const createsuper=(obj)=>{
+  return Supervisor.create(obj)
+}
 
-module.exports = {Supervisor};
+module.exports = {Supervisor,createsuper};

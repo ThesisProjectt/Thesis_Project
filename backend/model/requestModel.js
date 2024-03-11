@@ -26,5 +26,11 @@ const Request = sequelize.define('Request', {
   tableName: 'request',
   timestamps: false
 });
+const createreq=(obj)=>{
+  return Request.create(obj)
+}
+const getrequest=()=>{
+  return Request.findAll({})
+}
 
-module.exports = {Request};
+module.exports = {Request,createreq,getrequest};

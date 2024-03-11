@@ -10,6 +10,7 @@ const getClient = async (req, res) => {
     res.status(201).json(x);
   } catch (err) {
     console.log("Error in getting client", err);
+    res.status(500).send(err)
   }
 };
 
