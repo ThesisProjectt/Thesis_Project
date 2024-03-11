@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../database/index');
+const client = require('../controller/client');
 
 const Client = sequelize.define('Client', {
   id: {
@@ -39,8 +40,27 @@ const Client = sequelize.define('Client', {
   tableName: 'client',
   timestamps: false
 });
+
 const getClient=()=>{
   return Client.findAll({})
 }
 
-module.exports = {Client ,getClient};
+const findOneClient = (email) => {
+  return  Client.findOne({where:{email}})
+}
+
+const addClient = (data) => {
+  return Client.create(data)
+}
+
+const changePass = (email, password) => {
+  return  Client.update({password: password},{where:{email}});
+}
+
+module.exports = {
+  Client ,
+  getClient, 
+  addClient, 
+  findOneClient, 
+  changePass
+};
