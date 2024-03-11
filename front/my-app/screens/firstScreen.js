@@ -8,12 +8,17 @@ import {
 import { useEffect } from "react";
 import LOGO from "../assets/LOGO Cleaning.png";
 import background from "../assets/landing page.png";
+import CheckToken from "../functions/CheckToken";
 
 const FirstScreen = ({ navigation }) => {
-
-    useEffect(() => {
+  const isToken = CheckToken()
+  useEffect(() => {
       setTimeout(() => {
-        navigation.navigate("Login");
+        // if(isToken){
+        //   navigation.navigate("BottomNav");
+        // }else{
+          navigation.navigate("Login")
+        // }
       }, 3000);
     }, []);
   

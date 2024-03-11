@@ -16,6 +16,6 @@ export default Profile = {
     headerTintColor: "gray",  
     tabBarLabel: '', 
     tabBarIcon: ({ color }) => (
-      <Ionicons name="person-outline" color={color} size={30} />
+      <Ionicons name="person-outline" color={color} size={30} style={{marginTop:5}} />
     ),
   }

@@ -17,6 +17,6 @@ export default Home = {
     headerTintColor: "gray",  
     tabBarLabel: '', 
     tabBarIcon: ({ color }) => (
-      <Ionicons name="home-outline" color={color} size={30} />
+      <Ionicons name="home-outline" color={color} size={30} style={{marginTop:5}}/>
     ),
   }

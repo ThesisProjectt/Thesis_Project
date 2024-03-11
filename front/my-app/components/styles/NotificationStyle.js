@@ -16,6 +16,6 @@ export default Notification = {
     headerTintColor: "gray",  
     tabBarLabel: '', 
     tabBarIcon: ({ color }) => (
-      <Ionicons name="notifications-outline" color={color} size={30} />
+      <Ionicons name="notifications-outline" color={color} size={30} style={{marginTop:5}} />
     ),
   }

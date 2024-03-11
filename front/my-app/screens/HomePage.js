@@ -9,7 +9,6 @@ import {
   TouchableOpacity,
   ScrollView,
   StatusBar,
-  Dimensions,
 } from "react-native";
 import homepage from "../assets/homepage 1.png";
 import homepage2 from "../assets/50%off.png";
@@ -21,7 +20,7 @@ const HomePage = () => {
       <View style={styles.card}>
         <Image source={image} style={styles.flatImage} />
       </View>
-      <Text style={{ fontFamily: "Poppins" }} className="text-lg text-blue-700">
+      <Text style={{ fontFamily: "Poppins" }} className="text-md text-blue-800">
         {title}
       </Text>
     </TouchableOpacity>
@@ -30,9 +29,9 @@ const HomePage = () => {
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
       <View className="items-center">
-        <Image source={homepage} style={styles.image} />
+        <Image source={homepage} className="w-full m" style={styles.image} />
       </View>
-      <View className="flex-1 flex-row justify-between pl-7 pr-7 pt-5">
+      <View className="flex-1 flex-row justify-between pl-4 pr-4 pt-5">
         <Text
           style={{ fontFamily: "Poppins" }}
           className="text-2xl text-blue-800"
@@ -48,7 +47,7 @@ const HomePage = () => {
           </Text>
         </TouchableOpacity>
       </View>
-      <SafeAreaView className="flex-1 ml-4 mr-4">
+      <SafeAreaView className="flex-1 ">
         <FlatList
           horizontal
           showsHorizontalScrollIndicator={false}
@@ -60,14 +59,14 @@ const HomePage = () => {
           keyExtractor={(item) => item.id}
         />
       </SafeAreaView>
-        <Text
-          style={{ fontFamily: "Poppins" }}
-          className="text-2xl text-blue-800 pl-7 pt-5"
-        >
-          Special Offer
-        </Text>
+      <Text
+        style={{ fontFamily: "Poppins" }}
+        className="text-2xl text-blue-800 pl-4 pt-5"
+      >
+        Special Offer
+      </Text>
       <View className=" -mt-9 items-center">
-        <Image source={homepage2} style={styles.image2} />
+        <Image source={homepage2} className="w-full" style={styles.image2} />
       </View>
       <View style={{ height: 150, backgroundColor: "#EFFFFD" }}></View>
     </ScrollView>
@@ -78,6 +77,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#EFFFFD",
     paddingTop: StatusBar.currentHeight + 80,
+    paddingHorizontal: 15,
   },
   item: {
     width: 150,
@@ -87,12 +87,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   image: {
-    width: 390,
-    height: 240,
+    height: 230,
   },
   image2: {
     marginTop: 50,
-    width: 360,
     height: 175,
     borderRadius: 16,
   },

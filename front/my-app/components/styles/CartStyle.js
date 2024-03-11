@@ -16,6 +16,6 @@ export default Cart = {
     headerTintColor: "gray",  
     tabBarLabel: '', 
     tabBarIcon: ({ color }) => (
-      <Ionicons name="cart-outline" color={color} size={30} />
+      <Ionicons name="cart-outline" color={color} size={30} style={{marginTop:5}} />
     ),
   }

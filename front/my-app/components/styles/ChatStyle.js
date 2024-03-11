@@ -13,9 +13,9 @@ export default Chat = {
     headerTitleStyle: {
       fontFamily:'Poppins',
     },
-    headerTintColor: "gray",  
+    headerTintColor: "gray",
     tabBarLabel: '', 
     tabBarIcon: ({ color }) => (
-      <Ionicons name="chatbubble-outline" color={color} size={30} />
+      <Ionicons name="chatbubble-outline" color={color} size={30} style={{marginTop:5}}/>
     ),
   }
