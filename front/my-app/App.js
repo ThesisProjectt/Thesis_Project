@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { useRef } from 'react';
-import { StyleSheet, Text, View, SafeAreaView, Button } from 'react-native';import { useFonts } from 'expo-font';
+import { StyleSheet, Text, View, SafeAreaView, Button } from 'react-native';
+import { useFonts } from 'expo-font';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
@@ -30,7 +31,6 @@ export default function App() {
   if (!fontsLoaded) { return null}
 
   return (
-    
     <NavigationContainer>
       <Stack.Navigator >
         <Stack.Screen name='FirstScreen' component={FirstScreen} options={{headerShown:false}}/>
@@ -39,15 +39,11 @@ export default function App() {
         <Stack.Screen name='Login' component={Login} options={{headerShown:false}}/>
         <Stack.Screen name='Forget' component={Forget} options={{headerShown:false}}/>
         <Stack.Screen name='NewPwd' component={NewPwd} options={{headerShown:false}}/>
+        <Stack.Screen name="Carouss" component={Carouss}/>
+        <Stack.Screen name="CreateCustom" component={CreateCustom}/>
       </Stack.Navigator>
     </NavigationContainer>
-    
-
-
-
-         
   );
-  
 }
 
 const styles = StyleSheet.create({

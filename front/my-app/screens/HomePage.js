@@ -14,7 +14,7 @@ import homepage from "../assets/homepage 1.png";
 import homepage2 from "../assets/50%off.png";
 import imageData from "../functions/Categories";
 
-const HomePage = () => {
+const HomePage = ({navigation}) => {
   const Item = ({ image, title }) => (
     <TouchableOpacity activeOpacity={0.8} style={styles.item}>
       <View style={styles.card}>
@@ -38,7 +38,7 @@ const HomePage = () => {
         >
           Categories
         </Text>
-        <TouchableOpacity className="h-10">
+        <TouchableOpacity className="h-10" onPress={() => navigation.navigate("Categories")}>
           <Text
             style={{ fontFamily: "Poppins-Regular" }}
             className="text-lg font-normal text-blue-800"
