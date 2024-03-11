@@ -1,4 +1,4 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes, where } = require('sequelize');
 const sequelize = require('../database/index');
 
 const Admin = sequelize.define('Admin', {
@@ -23,5 +23,8 @@ const Admin = sequelize.define('Admin', {
   tableName: 'admin',
   timestamps: false
 });
+const getadmin=(obj)=>{
+  return Admin.findAll({where:{email:obj.email,password:obj.password}});
+}
 
-module.exports = {Admin};
+module.exports = {Admin,getadmin};
