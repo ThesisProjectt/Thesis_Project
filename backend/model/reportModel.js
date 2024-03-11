@@ -23,5 +23,8 @@ const Report = sequelize.define('Report', {
   tableName: 'report',
   timestamps: false
 });
+const cr=(obj)=>{
+return  Report.create(obj)
+}
 
-module.exports = {Report};
+module.exports = {Report,cr};

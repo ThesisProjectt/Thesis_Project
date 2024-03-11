@@ -18,12 +18,12 @@ let list = [
     {image:cars,title:"Cars"}
 ]
 
-export default function Catego() {
+export default function Catego({navigation}) {
   const [categories,setCategories]=useState([])
   const  [packs,setPacks]=useState([])
   const fetchCategories = async () => {
     try {
-  const response = await fetch(`http://192.168.104.17:3000/category/getCategories`)
+  const response = await fetch(`http://192.168.11.42:3000/category/getCategories`)
     const data = await response.json()
     setCategories(data)
     }
@@ -34,7 +34,7 @@ export default function Catego() {
 
   const fetchPacks = async (id) => {
     try {
-  const response = await fetch(`http://192.168.104.17:3000/pack/get/${id}`)
+  const response = await fetch(`http://192.168.11.42:3000/pack/get/${id}`)
     const data = await response.json()
     setPacks(data)
     }
@@ -52,7 +52,7 @@ export default function Catego() {
       <View  style={styles.container}>
         
         <View className="flex flex-row  items-center">
-        <AntDesign name="leftcircleo" size={24} color="black"/>
+        <AntDesign name="leftcircleo" size={24} color="black" onPress={()=>{navigation.navigate("")}}/>
         <Text className="text-2xl text-gray-500 mb-12 mt-12" >Categories</Text>
         </View>
         <FlatList
@@ -66,10 +66,11 @@ export default function Catego() {
                 <View className="bg-white w-36 h-36  flex items-center justify-center rounded-lg " style={styles.shadow}>
                 <Pressable onPress={()=>{fetchPacks(item.id)}}>
   
-                <Image source={{uri:item.image}} className=" h-28 w-28" />
+                <Image source={{uri:item.image}} className=" h-28 w-28"/>
 </Pressable>
                 </View>
-                <Text className="text-blue-900 text-center mt-2 text-lg"> {item.name} </Text>
+                <Text className="text-blue-900 text-center mt-2 text-lg" 
+                 onPress={()=>{navigation.navigate("Carouss")}}> {item.name} </Text>
                 </View>
                     {/* <IoArrowBackCircleOutline/> */}
                 </View>

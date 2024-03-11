@@ -23,5 +23,7 @@ const Rating = sequelize.define('Rating', {
   tableName: 'ratings',
   timestamps: false
 });
-
-module.exports = {Rating};
+const getr =()=>{
+  return Rating.findAll();
+}
+module.exports = {Rating,getr};

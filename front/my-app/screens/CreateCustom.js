@@ -11,7 +11,7 @@ export default CreateCustom = ({navigation})=>{
     const [checked, setChecked] = useState(false);
     const fetchServices = async () => {
         try {
-      const response = await fetch(`http://192.168.104.17:3000/services/getServices`)
+      const response = await fetch(`http://192.168.11.42:3000/services/getServices`)
         const data = await response.json()
         setServices(data)
         }
@@ -31,10 +31,10 @@ useEffect(()=>{
         <View className="flex-1 items-center content-center mt-10">
         <Text className="w-36 text-center text-gray-400 font-bold text-opacity-50 text-xl "> Custom Pack</Text>
     <Text className="text-sky-700 text-xl font-bold text-left mr-auto mb-4" style={{color:"#02337B"}}>Select your cleaning needs</Text>
-        {services.map((element)=>{
+        {services.map((element,index)=>{
           return (
     
-        <View className=" flex-row items-center mb-4 ">
+        <View key={index} className=" flex-row items-center mb-4 ">
 
 <View  className="w-10 h-10 bg-white rounded-lg shadow mr-2 flex items-center justify-center"> 
 <Image className="w-8 h-8 rounded" source={{uri:element.image}}  />
@@ -77,7 +77,7 @@ useEffect(()=>{
         <Pressable style={{backgroundColor:"#02337B",width:300,height:48,borderRadius:20,marginBottom:8,display:"flex",alignItems:"center",justifyContent:"center"}} >
           <Text className="text-white text-center text-xl">Create Your Pack</Text>
         </Pressable>
-        <Pressable  onPress={()=>navigation.navigate("Login")} style={{backgroundColor:"#B21212",width:300,height:48,borderRadius:20,display:"flex",alignItems:"center",justifyContent:"center"}} >
+        <Pressable  style={{backgroundColor:"#B21212",width:300,height:48,borderRadius:20,display:"flex",alignItems:"center",justifyContent:"center"}} >
           <Text className="text-white text-center text-xl " onPress={()=>{navigation.navigate("Carouss")}}>Cancel</Text>
         </Pressable>
          
