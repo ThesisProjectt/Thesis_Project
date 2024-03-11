@@ -1,5 +1,7 @@
 import * as React from 'react';
-import { useFonts } from 'expo-font';
+import { StatusBar } from 'expo-status-bar';
+import { useRef } from 'react';
+import { StyleSheet, Text, View, SafeAreaView, Button } from 'react-native';import { useFonts } from 'expo-font';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
@@ -9,12 +11,16 @@ import Signup from './screens/Signup';
 import Login from './screens/Login';
 import Forget from './screens/Forget';
 import NewPwd from './screens/NewPwd';
+import CreateCustom from './screens/CreateCustom';
+import Carouss from './screens/Packhas'
 import FirstScreen from "./screens/firstScreen";
 import BottomNav from './components/BottomNav';
 
 const Stack = createStackNavigator();
 
 export default function App() {
+   const ref = useRef();
+  
 
   const [fontsLoaded] = useFonts({
     'Poppins': require("./assets/fonts/Poppins-Bold.ttf"),
@@ -24,6 +30,7 @@ export default function App() {
   if (!fontsLoaded) { return null}
 
   return (
+    
     <NavigationContainer>
       <Stack.Navigator >
         <Stack.Screen name='FirstScreen' component={FirstScreen} options={{headerShown:false}}/>
@@ -34,6 +41,28 @@ export default function App() {
         <Stack.Screen name='NewPwd' component={NewPwd} options={{headerShown:false}}/>
       </Stack.Navigator>
     </NavigationContainer>
-  );
+    
 
+
+
+         
+  );
+  
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  pager: {
+    flex: 1,
+    alignSelf: "stretch"
+  }
+});
+
+
+
+  

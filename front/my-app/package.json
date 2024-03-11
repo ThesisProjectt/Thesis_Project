@@ -9,6 +9,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@react-native-community/checkbox": "^0.5.17",
     "@lottiefiles/react-lottie-player": "^3.5.3",
     "@react-native-async-storage/async-storage": "1.21.0",
     "@react-navigation/bottom-tabs": "^6.5.17",
@@ -29,8 +30,10 @@
     "react-native-animated-loader": "^1.0.0",
     "react-native-gesture-handler": "~2.14.0",
     "react-native-keyboard-aware-scroll-view": "^0.9.5",
+    "react-native-pager-view": "^6.2.3",
     "react-native-paper": "^5.12.3",
     "react-native-safe-area-context": "^3.3.2",
+    "react-native-snap-carousel": "^3.9.1",
     "react-native-svg": "^12.1.1",
     "react-native-tailwindcss": "^1.1.11",
     "react-native-user-avatar": "^1.0.8",

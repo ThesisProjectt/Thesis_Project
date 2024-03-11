@@ -170,6 +170,7 @@ const Signup = ({ navigation }) => {
           </View>
           </View>
         </ImageBackground>
+        
       </KeyboardAwareScrollView>
     </SafeAreaView>
   );

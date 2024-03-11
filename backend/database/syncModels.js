@@ -33,11 +33,11 @@ Supervisor.hasMany(Report, {foreignKey: "supervisor_id"});
 
 Pack.hasMany(Request, {foreignKey: 'pack_id'});
 Pack.belongsToMany(Service, { through: PackHasServices , foreignKey:"pack_id"});
+Service.belongsToMany(Pack, { through: PackHasServices , foreignKey:"service_id"});
 
 Request.hasOne(Mission, {foreignKey:"request_id"});
 Request.hasOne(Payment, {foreignKey:"request_id"});
 
-Service.belongsToMany(Pack, { through: PackHasServices , foreignKey:"service_id"});
 
 Employee.hasMany(Presence, {foreignKey: "employee_id"});
 

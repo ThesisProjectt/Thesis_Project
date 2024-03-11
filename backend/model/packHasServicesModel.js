@@ -24,7 +24,7 @@ const PackHasServices = sequelize.define('PackHasServices', {
     allowNull: true
   }
 }, {
-  tableName: 'pack_has_services',
+  tableName: 'PackHasServices',
   timestamps: false
 });
 

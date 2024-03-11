@@ -94,6 +94,7 @@ const Login = ({ navigation }) => {
             <Text
               style={{ fontFamily: "Poppins" }}
               className="text-cyan-50 text-xl"
+              onPress={()=>{navigation.navigate("Categories")}}
             >
               Sign in
             </Text>
