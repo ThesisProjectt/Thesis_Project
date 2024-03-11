@@ -11,6 +11,8 @@
   "dependencies": {
     "@lottiefiles/react-lottie-player": "^3.5.3",
     "@react-native-async-storage/async-storage": "1.21.0",
+    "@react-navigation/bottom-tabs": "^6.5.17",
+    "@react-navigation/material-bottom-tabs": "^6.2.25",
     "@react-navigation/native": "^6.1.14",
     "@react-navigation/stack": "^6.3.25",
     "axios": "^1.6.7",
@@ -30,7 +32,9 @@
     "react-native-paper": "^5.12.3",
     "react-native-safe-area-context": "^3.3.2",
     "react-native-svg": "^12.1.1",
-    "react-native-tailwindcss": "^1.1.11"
+    "react-native-tailwindcss": "^1.1.11",
+    "react-native-user-avatar": "^1.0.8",
+    "react-native-vector-icons": "^10.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
