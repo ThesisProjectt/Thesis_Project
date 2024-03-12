@@ -16,6 +16,7 @@ import CreateCustom from './screens/CreateCustom';
 import Carouss from './screens/Packhas'
 import FirstScreen from "./screens/firstScreen";
 import BottomNav from './components/BottomNav';
+import Loading from './components/Loading';
 
 const Stack = createStackNavigator();
 
@@ -41,6 +42,7 @@ export default function App() {
         <Stack.Screen name='NewPwd' component={NewPwd} options={{headerShown:false}}/>
         <Stack.Screen name="Carouss" component={Carouss}/>
         <Stack.Screen name="CreateCustom" component={CreateCustom}/>
+        <Stack.Screen name='Loading' component={Loading} options={{headerShown:false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

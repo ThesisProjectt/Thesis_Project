@@ -20,7 +20,7 @@ const FirstScreen = ({ navigation }) => {
           }else{
             navigation.navigate("Login")
           }
-        } )
+        })
           .catch((err) => console.log(err));
       }, 3000);
     }, []);
