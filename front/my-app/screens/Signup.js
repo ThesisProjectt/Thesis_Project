@@ -14,6 +14,7 @@ import background from "../assets/sign up.png";
 import { Ionicons } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import axios from "axios";
+import Loading from "../components/Loading";
 
 const Signup = ({ navigation }) => {
   const [visible, setVisible] = useState(true);
@@ -22,6 +23,7 @@ const Signup = ({ navigation }) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   function validate() {
     const pattern = /^[\w-.]+@[\w-]+\.[a-zA-Z]{2,}$/;
@@ -60,17 +62,22 @@ const Signup = ({ navigation }) => {
         password: password,
       };
       if (isValidated) {
-        await axios.post("http://192.168.11.38:3000/client/signup", data)
-        console.log('done')
+        setLoading(true);
+        await axios.post("http://192.168.11.122:3000/client/signup", data)
         navigation.replace("Login")
       }
     } catch (e) {
+      setLoading(false)
       setError("This email has already been used.");
     }
   };
 
   return (
     <SafeAreaView style={styles.container}>
+      {loading
+      ?
+        <Loading/>
+      :
       <KeyboardAwareScrollView keyboardShouldPersistTaps="never">
         <ImageBackground
           source={background}
@@ -172,6 +179,7 @@ const Signup = ({ navigation }) => {
         </ImageBackground>
         
       </KeyboardAwareScrollView>
+      }
     </SafeAreaView>
   );
 };
