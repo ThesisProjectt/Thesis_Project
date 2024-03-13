@@ -1,65 +1,34 @@
 import { StatusBar,StyleSheet,Text,View,Dimensions,Image, Button } from "react-native";
 import Carousel,{Pagination} from 'react-native-snap-carousel'
 import { useState,useRef,useEffect} from "react";
-export  const Slider_Width=Dimensions.get('window').width+30
+export  const Slider_Width=Dimensions.get('window').width+40
 export const Item_Width=Math.round(Slider_Width*0.8)
 
-const renderItem = ({item})=>{
-return (
-    <View style={styles.flatContainer}> 
-    <View className=" bg-white p-4 ml-2 mr-2 mt-1 rounded-xl" style={{width:300}}>
-    <Text className="text-black text-xl text-center"> {item.name}</Text>
-    <Text className="text-black"> Price : {item.varying_price}</Text>
-    </View>
-    <View className="flex m-4 content-around ">
-{console.log(item)}
-{services.map((ele)=> {return (
-                
-                <View > 
-                <View>
-                {/* <Text className="text-white text-xl"> {ele.name}</Text> */}
-                {/* <Text className="text-white "> Price : {ele.price}</Text> */}
-                </View>
-                <View className="flex m-4 content-around ">
-{console.log(ele)}
-                <Text className="text-white font-bold"> {ele.name} </Text>
-               
-                </View>
-                 </View>
-              )})}
-    </View>
-     </View>
-)
-}
 
-export default  Carouss = ({navigation}) =>{
 
-const [services,setServices]=useState([])
+export default  Carouss = ({navigation,route}) =>{
+  const {catid,catName} =route.params
+console.log("packsssssss",catid)
+console.log("name",catName)
+
 const [packs,setPacks]=useState([])
-    const fetchServices = async () => {
-        try {
-      const response = await fetch(`http://192.168.11.42:3000/services/getServices`)
-        const data = await response.json()
-        setServices(data)
-        }
-        catch(error){console.error("error fetching error",error)
-      
-      }
-      }
 
-      const fetchPacks = async () => {
+   
+
+      const fetchPacks = async (id) => {
         try {
-      const response = await fetch(`http://192.168.11.42:3000/pack/getPacks`)
+      const response = await fetch(`http://192.168.104.31:3000/pack/get/${id}`)
         const data = await response.json()
+        console.log(data)
         setPacks(data)
         }
         catch(error){console.error("error fetching error",error)
       
       }
       }
+ 
 useEffect(()=>{
-    fetchServices()
-    fetchPacks()
+    fetchPacks(catid)
 },[])
 
 
@@ -67,34 +36,35 @@ useEffect(()=>{
      const isCarousel = useRef(null)
      return (
         <View style={styles.container}>
+          <Text style={{fontSize:20,color:"gray"}}> {catName} </Text>
             <Carousel
             ref={isCarousel}
             data={packs}
             renderItem={ ({item})=>{
                 return (
-                    <View style={styles.flatContainer}> 
-                    <View className=" bg-white p-4 ml-2 mr-2 mt-1 rounded-xl" style={{width:300}}>
-                    <Text className="text-black text-xl text-center"> {item.name}</Text>
-                    <Text className="text-black"> Price : {item.varying_price}</Text>
+                  <View> 
+                    <View className="  bg-slate-50 p-2  rounded-xl shadow-lg mb-2 " style={{width:320}}>
+                    <Text className="text-blue-740  font-bold text-xl text-left h-12"> {item.name}</Text>
+                    <Text className="text-blue-700 text-lg font-semibold"> Price : {item.varying_price}</Text>
                     </View>
-                    <View className="flex m-4 content-around ">
-                {console.log(item)}
-                {services.map((ele)=> {return (
-                                
+<View style={styles.flatContainer}> 
+                    <View className="flex m-2 content-around ">
+                {item.Services.map((ele)=> {return (      
                                 <View > 
                                 <View>
-                                {/* <Text className="text-white text-xl"> {ele.name}</Text> */}
-                                {/* <Text className="text-white "> Price : {ele.price}</Text> */}
+                               
                                 </View>
-                                <View className="flex m-4 content-around ">
-                {console.log(ele)}
-                                <Text className="text-white font-bold"> {ele.name} </Text>
+                                <View className="flex m-2 content-around ">
+            
+                                <Text className="text-white text-lg font-bold"> {`\u2022 ${ele.name}`} </Text>
                                
                                 </View>
                                  </View>
                               )})}
                     </View>
                      </View>
+
+                    </View>
                 )
                 }}
             sliderWidth={Slider_Width}
@@ -103,29 +73,24 @@ useEffect(()=>{
             keyExtractor={(item)=>item.id}
             
             />
-            {/* <Pagination
-            dotsLength={packs.length}
-            activeDotIndex={index}
-            carouselRef={isCarousel}
-            dotStyle={{width:10,height:10,borderRadius:10,marginHorizontal:8,backGroundColor:"green"}}
-            /> */}
-<Text style={{width:320,height:40,backgroundColor:"#008BEA",textAlign:"center",color:"white",fontSize:20,borderRadius:20,marginTop:10,height:50}}> Purchase </Text>
-<Text style={{width:320,height:40,backgroundColor:"#bbbbbb",textAlign:"center",color:"white",fontSize:20,borderRadius:20,marginTop:10,height:50}} onPress={()=>{navigation.navigate("CreateCustom")}}> You Can Create Your Custom Package </Text>
-        </View>
+       
+<Text style={{width:320,backgroundColor:"#008BEA",textAlign:"center",color:"white",fontSize:20,borderRadius:20,}}> Purchase </Text>
+       </View>
      )
 }
 
 const styles= StyleSheet.create({
     container:{
-        paddingTop:50,
-        alignItems:"center"
+      flex:1,
+        justifyContent:"center",
+        alignItems:"center",
+        backgroundColor:"#EFFFFD"
     },
     flatContainer:{
-    borderWidth:2,
-    borderColor:"black",
-    marginRight:4,
-    backgroundColor:"midnightblue",
     width:320,
-    height:500,
-    backgroundColor:"#008BEA"}
+    height:400,
+    borderRadius:20,
+    backgroundColor:"#008BEA",
+  
+}
 })

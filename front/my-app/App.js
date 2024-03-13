@@ -33,6 +33,10 @@ export default function App() {
     
     <NavigationContainer>
       <Stack.Navigator >
+
+        <Stack.Screen name='Categories' component={Catego} options={{headerShown:false}}/> 
+        <Stack.Screen name="Carouss" component={Carouss} options={{headerShown:false}} />       
+        <Stack.Screen name="CreateCustom" component={CreateCustom} options={{headerShown:false}}/>
         <Stack.Screen name='FirstScreen' component={FirstScreen} options={{headerShown:false}}/>
         <Stack.Screen name='BottomNav' component={BottomNav} options={{headerShown:false}}/>
         <Stack.Screen name='Signup' component={Signup} options={{headerShown:false}}/>
@@ -64,5 +68,3 @@ const styles = StyleSheet.create({
 });
 
 
-
-  
