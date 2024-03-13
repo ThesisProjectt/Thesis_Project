@@ -11,7 +11,7 @@ export default CreateCustom = ({navigation})=>{
     const [checked, setChecked] = useState(false);
     const fetchServices = async () => {
         try {
-      const response = await fetch(`http://192.168.11.42:3000/services/getServices`)
+      const response = await fetch(`http://192.168.104.31:3000/services/getServices`)
         const data = await response.json()
         setServices(data)
         }

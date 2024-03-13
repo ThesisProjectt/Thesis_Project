@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../database/index');
 
-const PackHasServices = sequelize.define('PackHasServices', {
+const   PackHasServices = sequelize.define('PackHasServices', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,

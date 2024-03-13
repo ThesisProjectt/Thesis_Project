@@ -21,9 +21,11 @@ let list = [
 export default function Catego({navigation}) {
   const [categories,setCategories]=useState([])
   const  [packs,setPacks]=useState([])
+  const [one,setOne]=useState([])
+  
   const fetchCategories = async () => {
     try {
-  const response = await fetch(`http://192.168.11.171:3000/category/getCategories`)
+  const response = await fetch(`http://192.168.104.31:3000/category/getCategories`)
     const data = await response.json()
     setCategories(data)
     }
@@ -32,27 +34,20 @@ export default function Catego({navigation}) {
   }
   }
 
-  const fetchPacks = async (id) => {
-    try {
-  const response = await fetch(`http://192.168.11.171:3000/pack/get/${id}`)
-    const data = await response.json()
-    setPacks(data)
-    }
-    catch(error){console.error("error fetching error",error)
-  
-  }
-  }
 
   useEffect(()=>{
     fetchCategories()
+ 
+
    
 
   },[])
+
   return (
       <View  style={styles.container}>
         
         <View className="flex flex-row  items-center">
-        <AntDesign name="leftcircleo" size={24} color="black" onPress={()=>{navigation.navigate("")}}/>
+        <AntDesign name="leftcircleo" size={24} color="black" onPress={()=>{navigation.navigate("FirstScreen")}}/>
         <Text className="text-2xl text-gray-500 mb-12 mt-12" >Categories</Text>
         </View>
         <FlatList
@@ -64,15 +59,16 @@ export default function Catego({navigation}) {
                  <View style={styles.gridContainer}>
                 <View style={styles.gridItem}>  
                 <View className="bg-white w-36 h-36  flex items-center justify-center rounded-lg " style={styles.shadow}>
-                <Pressable onPress={()=>{fetchPacks(item.id)}}>
-  
+                {console.log(one,"some")}
+                <Pressable >
                 <Image source={{uri:item.image}} className=" h-28 w-28"/>
-</Pressable>
+                </Pressable>
+                
                 </View>
-                <Text className="text-blue-900 text-center mt-2 text-lg" 
-                 onPress={()=>{navigation.navigate("Carouss")}}> {item.name} </Text>
+                <Text className="text-blue-900 text-center mt-2 text-lg" onPress={()=>{navigation.navigate("Carouss",{catid:item.id,catName:item.name});}}
+               > {item.name} {item.id} </Text>
                 </View>
-                    {/* <IoArrowBackCircleOutline/> */}
+                   
                 </View>
             )
             
