@@ -18,6 +18,7 @@ import Loading from "../components/Loading";
 
 const Signup = ({ navigation }) => {
   const [visible, setVisible] = useState(true);
+  const [visible2, setVisible2] = useState(true)
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -34,13 +35,13 @@ const Signup = ({ navigation }) => {
       setError("Please enter a valid email address.");
       return false;
     } else if (password.length < 8) {
-      setError("Please enter a password of at least 8 characters");
+      setError("Password must contain at least 8 characters");
       return false;
     } else if (!/\d/.test(password)) {
       setError("Your password must contain a number");
       return false;
     } else if (!/[A-Z]/.test(password)) {
-      setError("Your password must contain at least one uppercase");
+      setError("Your password must contain one uppercase");
       return false;
     } else if (!/[a-z]/.test(password)) {
       setError("Your password must contain lowercase letter");
@@ -63,7 +64,7 @@ const Signup = ({ navigation }) => {
       };
       if (isValidated) {
         setLoading(true);
-        await axios.post("http://192.168.11.122:3000/client/signup", data)
+        await axios.post("http://192.168.11.171:3000/client/signup", data)
         navigation.replace("Login")
       }
     } catch (e) {
@@ -78,7 +79,7 @@ const Signup = ({ navigation }) => {
       ?
         <Loading/>
       :
-      <KeyboardAwareScrollView keyboardShouldPersistTaps="never">
+      <KeyboardAwareScrollView canCancelContentTouches={false} keyboardShouldPersistTaps="never">
         <ImageBackground
           source={background}
           resizeMode="cover"
@@ -137,14 +138,14 @@ const Signup = ({ navigation }) => {
               <TextInput
                 required
                 placeholder="Confirm Password"
-                secureTextEntry={visible}
+                secureTextEntry={visible2}
                 onChangeText={(text) => setConfirmPassword(text)}
               />
               <TouchableOpacity
-                onPress={() => setVisible(!visible)}
+                onPress={() => setVisible2(!visible2)}
                 style={{ position: "absolute", right: 12 }}
               >
-                {visible ? (
+                {visible2 ? (
                   <Ionicons name="eye-off" size={24} color={"black"} />
                 ) : (
                   <Ionicons name="eye" size={24} color={"black"} />

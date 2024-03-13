@@ -23,7 +23,7 @@ export default function Catego({navigation}) {
   const  [packs,setPacks]=useState([])
   const fetchCategories = async () => {
     try {
-  const response = await fetch(`http://192.168.11.122:3000/category/getCategories`)
+  const response = await fetch(`http://192.168.11.171:3000/category/getCategories`)
     const data = await response.json()
     setCategories(data)
     }
@@ -34,7 +34,7 @@ export default function Catego({navigation}) {
 
   const fetchPacks = async (id) => {
     try {
-  const response = await fetch(`http://192.168.11.122:3000/pack/get/${id}`)
+  const response = await fetch(`http://192.168.11.171:3000/pack/get/${id}`)
     const data = await response.json()
     setPacks(data)
     }

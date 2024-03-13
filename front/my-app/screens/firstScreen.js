@@ -29,7 +29,7 @@ const FirstScreen = ({ navigation }) => {
       <SafeAreaView style={styles.container}>
         <ImageBackground
           source={background}
-          resizeMode="cover"
+          resizeMode="contain"
           className="flex-1 items-center"
         >
         <View style={styles.inner}>

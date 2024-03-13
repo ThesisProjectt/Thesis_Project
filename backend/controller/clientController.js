@@ -74,9 +74,26 @@ const changePassword = async (req, res) => {
   };
 };
 
+const getImgClient = async (req, res) => {
+  const id = req.params.id
+  try{
+    await db.findImgClient(id)
+      .then((data)=>{
+        res.status(200).json(data.image)
+      })
+      .catch((err) => 
+      res.status(500).json(err)
+      )
+  }
+  catch(err){
+    res.status(500).json(err)
+  }
+}
+
 module.exports = {
   getClient,
   signUp,
   login,
-  changePassword
+  changePassword,
+  getImgClient
 };

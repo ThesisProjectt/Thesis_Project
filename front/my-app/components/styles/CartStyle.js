@@ -13,10 +13,13 @@ export default Cart = {
     />
   ),
   headerRight: (props) => <Avatar {...props} />,
-  headerTransparent: true,
-  headerStyle: {
-    height: 130,
-  },
+    // headerTransparent: true,
+    headerStyle: {
+        height: 130,
+        backgroundColor: "#EFFFFD",
+        height: 100,
+        elevation: 0,
+      },
   headerTitleStyle: {
     fontFamily: "Poppins",
   },

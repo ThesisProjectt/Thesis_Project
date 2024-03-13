@@ -17,12 +17,13 @@ import Carouss from './screens/Packhas'
 import FirstScreen from "./screens/firstScreen";
 import BottomNav from './components/BottomNav';
 import Loading from './components/Loading';
+import About from './screens/About';
+import AboutStyle from './components/styles/AboutStyle';
 
 const Stack = createStackNavigator();
 
 export default function App() {
    const ref = useRef();
-  
 
   const [fontsLoaded] = useFonts({
     'Poppins': require("./assets/fonts/Poppins-Bold.ttf"),
@@ -43,6 +44,7 @@ export default function App() {
         <Stack.Screen name="Carouss" component={Carouss}/>
         <Stack.Screen name="CreateCustom" component={CreateCustom}/>
         <Stack.Screen name='Loading' component={Loading} options={{headerShown:false}}/>
+        <Stack.Screen name='About Us' component={About} options={AboutStyle}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

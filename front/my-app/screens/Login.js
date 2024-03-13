@@ -8,6 +8,7 @@ import {
   SafeAreaView,
   ImageBackground,
   TextInput,
+  ScrollView,
 } from "react-native";
 import LOGO from "../assets/LOGO Cleaning.png";
 import background from "../assets/sign in.png";
@@ -30,7 +31,7 @@ const Login = ({ navigation }) => {
     const data = { email: email, password: password };
     try {
       setLoading(true);
-      await axios.post("http://192.168.11.122:3000/client/login", data)
+      await axios.post("http://192.168.11.171:3000/client/login", data)
         .then(async (response) => {
           setError(null);
           const token = response.headers["token"];
@@ -105,7 +106,7 @@ const Login = ({ navigation }) => {
                 style={{ fontFamily: "Poppins" }}
                 className="text-cyan-50 text-xl"
                 onPress={() => {
-                  navigation.navigate("Categories");
+                  handleSubmit()
                 }}
               >
                 Sign in
