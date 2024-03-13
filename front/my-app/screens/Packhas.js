@@ -38,7 +38,7 @@ const [services,setServices]=useState([])
 const [packs,setPacks]=useState([])
     const fetchServices = async () => {
         try {
-      const response = await fetch(`http://192.168.11.42:3000/services/getServices`)
+      const response = await fetch(`http://192.168.11.171:3000/services/getServices`)
         const data = await response.json()
         setServices(data)
         }
@@ -49,7 +49,7 @@ const [packs,setPacks]=useState([])
 
       const fetchPacks = async () => {
         try {
-      const response = await fetch(`http://192.168.11.42:3000/pack/getPacks`)
+      const response = await fetch(`http://192.168.11.171:3000/pack/getPacks`)
         const data = await response.json()
         setPacks(data)
         }
