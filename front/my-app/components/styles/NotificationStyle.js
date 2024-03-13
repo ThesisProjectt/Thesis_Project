@@ -6,10 +6,13 @@ export default Notification = {
     headerTitleAlign: "center", 
     headerLeft: false, 
     headerRight: (props) => <Avatar {...props} />,
-    headerTransparent: true,
+    // headerTransparent: true,
     headerStyle: {
-      height: 130,
-    },
+        height: 130,
+        backgroundColor: "#EFFFFD",
+        height: 100,
+        elevation: 0,
+      },
     headerTitleStyle: {
       fontFamily:'Poppins',
     },

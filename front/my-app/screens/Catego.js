@@ -35,7 +35,6 @@ export default function Catego({navigation}) {
   }
 
 
-
   useEffect(()=>{
     fetchCategories()
  

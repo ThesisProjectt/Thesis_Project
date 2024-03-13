@@ -57,10 +57,15 @@ const changePass = (email, password) => {
   return  Client.update({password: password},{where:{email}});
 }
 
+const findImgClient = (id) => {
+  return  Client.findOne({where:{id}})
+}
+
 module.exports = {
   Client ,
   getClient, 
   addClient, 
   findOneClient, 
-  changePass
+  changePass,
+  findImgClient
 };

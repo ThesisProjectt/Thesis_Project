@@ -14,9 +14,10 @@ import homepage from "../assets/homepage 1.png";
 import homepage2 from "../assets/50%off.png";
 import imageData from "../functions/Categories";
 
-const HomePage = () => {
+const HomePage = ({navigation}) => {
+
   const Item = ({ image, title }) => (
-    <TouchableOpacity activeOpacity={0.8} style={styles.item}>
+    <TouchableOpacity activeOpacity={0.8} onPress={()=>navigation.navigate("About Us")} style={styles.item}>
       <View style={styles.card}>
         <Image source={image} style={styles.flatImage} />
       </View>
@@ -29,7 +30,7 @@ const HomePage = () => {
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
       <View className="items-center">
-        <Image source={homepage} className="w-full m" style={styles.image} />
+        <Image source={homepage} className="w-full" style={styles.image} />
       </View>
       <View className="flex-1 flex-row justify-between pl-4 pr-4 pt-5">
         <Text
@@ -38,7 +39,7 @@ const HomePage = () => {
         >
           Categories
         </Text>
-        <TouchableOpacity className="h-10">
+        <TouchableOpacity className="h-10" onPress={() => navigation.navigate("Categories")}>
           <Text
             style={{ fontFamily: "Poppins-Regular" }}
             className="text-lg font-normal text-blue-800"
@@ -68,7 +69,7 @@ const HomePage = () => {
       <View className=" -mt-9 items-center">
         <Image source={homepage2} className="w-full" style={styles.image2} />
       </View>
-      <View style={{ height: 150, backgroundColor: "#EFFFFD" }}></View>
+      <View style={{ height: 100, backgroundColor: "#EFFFFD" }}></View>
     </ScrollView>
   );
 };
@@ -76,8 +77,9 @@ const HomePage = () => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#EFFFFD",
-    paddingTop: StatusBar.currentHeight + 80,
+    paddingTop: StatusBar.currentHeight,
     paddingHorizontal: 15,
+    zIndex:1
   },
   item: {
     width: 150,

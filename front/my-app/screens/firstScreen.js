@@ -11,14 +11,17 @@ import background from "../assets/landing page.png";
 import CheckToken from "../functions/CheckToken";
 
 const FirstScreen = ({ navigation }) => {
-  const isToken = CheckToken()
+  
   useEffect(() => {
       setTimeout(() => {
-        // if(isToken){
-        //   navigation.navigate("BottomNav");
-        // }else{
-          navigation.navigate("Login")
-        // }
+        CheckToken().then((res) => {
+          if(res){
+            navigation.navigate("BottomNav");
+          }else{
+            navigation.navigate("Login")
+          }
+        })
+          .catch((err) => console.log(err));
       }, 3000);
     }, []);
   
@@ -26,7 +29,7 @@ const FirstScreen = ({ navigation }) => {
       <SafeAreaView style={styles.container}>
         <ImageBackground
           source={background}
-          resizeMode="cover"
+          resizeMode="contain"
           className="flex-1 items-center"
         >
         <View style={styles.inner}>

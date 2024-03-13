@@ -4,6 +4,7 @@ const client=require('../controller/clientController')
 
 // router.use(checkToken)
 router.get('/getclient', client.getClient)
+router.get('/getimg/:id', client.getImgClient)
 router.post("/signup", client.signUp);
 router.post("/login", client.login );
 router.put("/newpwd", client.changePassword)

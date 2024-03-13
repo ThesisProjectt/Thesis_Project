@@ -14,14 +14,17 @@ import background from "../assets/sign up.png";
 import { Ionicons } from "@expo/vector-icons";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import axios from "axios";
+import Loading from "../components/Loading";
 
 const Signup = ({ navigation }) => {
   const [visible, setVisible] = useState(true);
+  const [visible2, setVisible2] = useState(true)
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   function validate() {
     const pattern = /^[\w-.]+@[\w-]+\.[a-zA-Z]{2,}$/;
@@ -32,13 +35,13 @@ const Signup = ({ navigation }) => {
       setError("Please enter a valid email address.");
       return false;
     } else if (password.length < 8) {
-      setError("Please enter a password of at least 8 characters");
+      setError("Password must contain at least 8 characters");
       return false;
     } else if (!/\d/.test(password)) {
       setError("Your password must contain a number");
       return false;
     } else if (!/[A-Z]/.test(password)) {
-      setError("Your password must contain at least one uppercase");
+      setError("Your password must contain one uppercase");
       return false;
     } else if (!/[a-z]/.test(password)) {
       setError("Your password must contain lowercase letter");
@@ -65,13 +68,18 @@ const Signup = ({ navigation }) => {
         navigation.replace("Login")
       }
     } catch (e) {
+      setLoading(false)
       setError("This email has already been used.");
     }
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      <KeyboardAwareScrollView keyboardShouldPersistTaps="never">
+      {loading
+      ?
+        <Loading/>
+      :
+      <KeyboardAwareScrollView canCancelContentTouches={false} keyboardShouldPersistTaps="never">
         <ImageBackground
           source={background}
           resizeMode="cover"
@@ -130,14 +138,14 @@ const Signup = ({ navigation }) => {
               <TextInput
                 required
                 placeholder="Confirm Password"
-                secureTextEntry={visible}
+                secureTextEntry={visible2}
                 onChangeText={(text) => setConfirmPassword(text)}
               />
               <TouchableOpacity
-                onPress={() => setVisible(!visible)}
+                onPress={() => setVisible2(!visible2)}
                 style={{ position: "absolute", right: 12 }}
               >
-                {visible ? (
+                {visible2 ? (
                   <Ionicons name="eye-off" size={24} color={"black"} />
                 ) : (
                   <Ionicons name="eye" size={24} color={"black"} />
@@ -172,6 +180,7 @@ const Signup = ({ navigation }) => {
         </ImageBackground>
         
       </KeyboardAwareScrollView>
+      }
     </SafeAreaView>
   );
 };
