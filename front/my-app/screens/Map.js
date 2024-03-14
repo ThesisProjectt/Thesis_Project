@@ -6,7 +6,6 @@ import {
 } from "react-native";
 import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
 import { Ionicons } from "@expo/vector-icons";
-import * as Location from 'expo-location';
 
 const Map = (props) => {
   const mapRef = useRef();
@@ -17,32 +16,6 @@ const Map = (props) => {
     latitudeDelta: 2,
     longitudeDelta: 2,
   };
-
-//   const focusMap = () => {
-//     mapRef?.current.animateCamera(
-//       { center: region, zoom: 16 },
-//       { duration: 3000 }
-//     );
-//   };
-
-//   const getLocation = async () => {
-//     let { status } = await Location.requestForegroundPermissionsAsync();
-//     if (status !== 'granted') {
-//       setErrorMsg('Permission to access location was denied');
-//       return;
-//     }
-
-//     let locations = await Location.getCurrentPositionAsync({});
-//     setLocation(locations);
-//     console.log(location);
-//   }
-
-//   let text = 'Waiting..';
-//   if (errorMsg) {
-//     text = errorMsg;
-//   } else if (location) {
-//     text = JSON.stringify(location);
-//   }
 
   return (
       <View style={styles.mapContainer}>
