@@ -19,6 +19,8 @@ import BottomNav from './components/BottomNav';
 import Loading from './components/Loading';
 import About from './screens/About';
 import AboutStyle from './components/styles/AboutStyle';
+import Request from './screens/Request';
+import RequestStyle from './components/styles/RequestStyle';
 
 const Stack = createStackNavigator();
 
@@ -47,6 +49,7 @@ export default function App() {
         <Stack.Screen name="CreateCustom" component={CreateCustom}/>
         <Stack.Screen name='Loading' component={Loading} options={{headerShown:false}}/>
         <Stack.Screen name='About Us' component={About} options={AboutStyle}/>
+        <Stack.Screen name='Request' component={Request} options={RequestStyle}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

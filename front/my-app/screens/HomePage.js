@@ -17,7 +17,7 @@ import imageData from "../functions/Categories";
 const HomePage = ({navigation}) => {
 
   const Item = ({ image, title }) => (
-    <TouchableOpacity activeOpacity={0.8} onPress={()=>navigation.navigate("About Us")} style={styles.item}>
+    <TouchableOpacity activeOpacity={0.8} onPress={()=>navigation.navigate("Request")} style={styles.item}>
       <View style={styles.card}>
         <Image source={image} style={styles.flatImage} />
       </View>

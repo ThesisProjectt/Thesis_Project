@@ -4,7 +4,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 export default async function GetProfileImg () {
   const user = JSON.parse(await AsyncStorage.getItem("user"));
   try {
-    await axios(`http://192.168.11.171:3000/client/getimg/${user.id}`)
+    await axios(`http://192.168.1.15:3000/client/getimg/${user.id}`)
     .then(
      (res) => {
         console.log(res.data);
