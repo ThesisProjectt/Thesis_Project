@@ -5,19 +5,19 @@ import garden from "../assets/garden.png"
 
 export default data = [
     {   id: 1,
-        title:"Residentials",
+        name:"Residentials",
         image: Residentials
     },
     {   id:2,
-        title:"Commercials",
+        name:"Commercials",
         image: Commercials
     },
     {   id:3,
-        title:"Cars", 
+        name:"Cars", 
         image: cars
     },
     {   id:4,
-        title:"Garden",
+        name:"Garden",
         image: garden
     }
 ]

@@ -25,7 +25,7 @@ export default function Catego({navigation}) {
   
   const fetchCategories = async () => {
     try {
-  const response = await fetch(`http://192.168.1.15:3000/category/getCategories`)
+  const response = await fetch(`http://192.168.1.45:3000/category/getCategories`)
     const data = await response.json()
     setCategories(data)
     }

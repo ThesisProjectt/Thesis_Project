@@ -6,6 +6,7 @@ import {
   StyleSheet,
   StatusBar,
   TouchableOpacity,
+  ToastAndroid
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import Map from "./Map";
@@ -21,7 +22,6 @@ const Request = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
 
   const onRegionChange = (regions) => {
-    console.log(region);
     const localisation = {
       latitude: regions.nativeEvent.coordinate.latitude,
       longitude: regions.nativeEvent.coordinate.longitude,
@@ -55,9 +55,9 @@ const Request = ({ navigation }) => {
           longitude: region.longitude,
         };
         const data = { start: selected, pack_id: 1, client_id: user.id };
-        await axios.put(`http://192.168.1.15:3000/client/update/${user.id}`,localData);
-        await axios.post(`http://192.168.1.15:3000/request/postrequest`, data);
-        alert("Request sent successfully!");
+        await axios.put(`http://192.168.1.45:3000/client/update/${user.id}`,localData);
+        await axios.post(`http://192.168.1.45:3000/request/postrequest`, data);
+        ToastAndroid.show('Request sent successfully!', ToastAndroid.BOTTOM);
         navigation.navigate("Home");
       } catch (err) {
         setLoading(false);
@@ -66,25 +66,23 @@ const Request = ({ navigation }) => {
     }
   };
 
-  const fetchLocalisation = async () => {
-    const user = JSON.parse(await AsyncStorage.getItem("user"));
-    axios(`http://192.168.1.15:3000/client/profile/${user.id}`)
-      .then((result) => {
-        if (result.data.longitude && result.data.latitude) {
-          setRegion({
-            latitude: parseFloat(result.data.latitude),
-            longitude: parseFloat(result.data.longitude),
-          });
-          setMark(true);
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  };
-
   useEffect(() => {
-    fetchLocalisation();
+    (async () => {
+      const user = JSON.parse(await AsyncStorage.getItem("user"));
+      axios(`http://192.168.1.45:3000/client/profile/${user.id}`)
+        .then((result) => {
+          if (result.data.longitude && result.data.latitude) {
+            setRegion({
+              latitude: parseFloat(result.data.latitude),
+              longitude: parseFloat(result.data.longitude),
+            });
+            setMark(true);
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    })()
   }, []);
 
   return (
@@ -117,10 +115,10 @@ const Request = ({ navigation }) => {
 
           <View className="items-center mt-9">
             <View className=" shadow-xl p-3 bg-slate-100 flex-1 w-72 rounded-2xl shadow-slate-500">
-              <View className="flex-1 flex-col space-x-4 items-center">
-                <Text className="text-lg" style={{ fontFamily: "Poppins" }}>
+              <View className="flex-1 flex-col items-center">
+                {/* <Text className="text-lg" style={{ fontFamily: "Poppins" }}>
                   Your pack:
-                </Text>
+                </Text> */}
                 <Text className="text-lg" style={{ fontFamily: "Poppins" }}>
                   Your date:
                 </Text>
@@ -128,10 +126,10 @@ const Request = ({ navigation }) => {
                   className="text-md text-red-500"
                   style={{ fontFamily: "Poppins" }}
                 >
-                  {selected}
+                  {selected || "No Date Selected"}
                 </Text>
               </View>
-              <View className="flex-1 flex-col space-x-4 items-center">
+              <View className="flex-1 flex-col items-center mt-2">
                 <Text className="text-lg" style={{ fontFamily: "Poppins" }}>
                   Your location:
                 </Text>
@@ -139,7 +137,7 @@ const Request = ({ navigation }) => {
                   className="text-md text-red-500"
                   style={{ fontFamily: "Poppins" }}
                 >
-                  {region.longitude}, {region.latitude}
+                  {`${region.latitude}, ${region.longitude}` || "No Location Selected"}
                 </Text>
               </View>
             </View>
@@ -157,7 +155,7 @@ const Request = ({ navigation }) => {
               <Ionicons name="checkmark-done-sharp" size={24} color={"white"} />
             </TouchableOpacity>
           </View>
-          <View style={{ height: 100, backgroundColor: "#EFFFFD" }}></View>
+          <View style={{ height: 50, backgroundColor: "#EFFFFD" }}></View>
         </ScrollView>
       )}
     </View>

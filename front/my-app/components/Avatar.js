@@ -7,21 +7,19 @@ export default function Avatar() {
 
   const [image, setImage] = useState("");
 
-  const  getAvatar = async () => {
-    const user = JSON.parse(await AsyncStorage.getItem("user"));
-    try {
-      await axios(`http://192.168.1.15:3000/client/getimg/${user.id}`)
-      .then((res) => {
-          setImage(res.data)
-        })
-        .catch((err)=>console.error(err))
-    } catch (err) {
-      console.log(err);
-    }
-    }
-
   useEffect(()=>{
-    getAvatar()
+    (async () => {
+      const user = JSON.parse(await AsyncStorage.getItem("user"));
+      try {
+        await axios(`http://192.168.1.45:3000/client/getimg/${user.id}`)
+        .then((res) => {
+            setImage(res.data)
+          })
+          .catch((err)=>console.error(err))
+      } catch (err) {
+        console.log(err);
+      }
+    })()
   }, [])
 
   return (
