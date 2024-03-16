@@ -90,10 +90,37 @@ const getImgClient = async (req, res) => {
   }
 }
 
+const findOneClient = async (req, res) => {
+  const id = req.params.id
+  try{
+    await db.getOneClient(id)
+    .then((result)=>{
+      res.status(200).json(result)
+    })
+  }
+  catch(err){ 
+    res.status(500).json(err)
+  }
+}
+
+const updateClient = (req, res) => {
+  const id = req.params.id
+  const data = req.body
+  try{
+    db.update(id, data)
+    res.status(201).json("Successfully updated client")
+  }
+  catch(err){
+    res.status(500).json(err)
+  }
+}
+
 module.exports = {
   getClient,
   signUp,
   login,
   changePassword,
-  getImgClient
+  getImgClient,
+  findOneClient,
+  updateClient
 };

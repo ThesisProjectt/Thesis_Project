@@ -8,7 +8,7 @@ export default function Pack () {
 
   const fetchServices = async () => {
   try {
-const response = await fetch(`http://192.168.104.31:3000/services/getServices`)
+const response = await fetch(`http://192.168.1.15:3000/services/getServices`)
   const data = await response.json()
   setServices(data)
   }
@@ -18,7 +18,7 @@ const response = await fetch(`http://192.168.104.31:3000/services/getServices`)
 }
 const fetchPacks = async (id) => {
   try {
-const response = await fetch(`http://192.168.104.31:3000/pack/get/${id}`)
+const response = await fetch(`http://192.168.1.15:3000/pack/get/${id}`)
   const data = await response.json()
   setPacks(data)
   }

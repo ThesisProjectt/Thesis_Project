@@ -8,5 +8,7 @@ router.get('/getimg/:id', client.getImgClient)
 router.post("/signup", client.signUp);
 router.post("/login", client.login );
 router.put("/newpwd", client.changePassword)
+router.get('/profile/:id', client.findOneClient)
+router.put('/update/:id', client.updateClient)
 
 module.exports= router
