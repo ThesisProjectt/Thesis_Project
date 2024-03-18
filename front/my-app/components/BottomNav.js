@@ -8,14 +8,14 @@ import Profile from './styles/ProfileStyle';
 import Cart from './styles/CartStyle';
 import Notification from './styles/NotificationStyle';
 import Chat from './styles/ChatStyle';
-
+import P from '../screens/Pofile'
 const Tab = createBottomTabNavigator();
 
 function BottomNav() {
 
   return (
     <Tab.Navigator initialRouteName="Home" barStyle={{ backgroundColor: '#694fad' }}>
-      <Tab.Screen name="Profile" component={HomePage} options={Profile}/>
+      <Tab.Screen name="Profile" component={P} options={Profile}/>
       <Tab.Screen name="Categories" component={Categories} options={Cart}/>
       <Tab.Screen name="Home" component={HomePage} options={Home}/>
       <Tab.Screen name="Notification" component={HomePage} options={Notification}/>

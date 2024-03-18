@@ -2,7 +2,7 @@ import Avatar from '../Avatar';
 import { Ionicons } from "@expo/vector-icons"; 
 
 export default Profile = {
-    headerShown:true, 
+    headerShown:false, 
     headerTitleAlign: "center", 
     headerLeft: false, 
     headerRight: (props) => <Avatar {...props} />,

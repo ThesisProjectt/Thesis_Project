@@ -17,7 +17,7 @@ const [packs,setPacks]=useState([])
 
       const fetchPacks = async (id) => {
         try {
-      const response = await fetch(`http://192.168.104.31:3000/pack/get/${id}`)
+      const response = await fetch(`http://192.168.104.14:3000/pack/get/${id}`)
         const data = await response.json()
         console.log(data)
         setPacks(data)

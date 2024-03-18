@@ -36,6 +36,14 @@ const signUp = async (req, res) => {
     res.status(500).json(err);
   }
 };
+const getoneclient = async (req, res) => {
+  try {
+    const gotten = await db.Client.findAll({ where: { id: req.params.id } });
+    res.json(gotten);
+  } catch (error) {
+    console.log("error");
+  }
+}
 
 const login = async (req, res) => {
   const { email, password } = req.body;
@@ -89,11 +97,25 @@ const getImgClient = async (req, res) => {
     res.status(500).json(err)
   }
 }
+const updateuser = async (req, res) => {
+  try {
+    await db.Client.update(req.body, {
+      where: { id: req.params.id },
+    }).then((data)=>{
+      res.status(203).json(data);
+    })
+      
+  } catch (error) {
+    res.status(500).send(error);
+  }
+}
 
 module.exports = {
   getClient,
   signUp,
   login,
   changePassword,
-  getImgClient
+  getImgClient,
+  getoneclient,
+  updateuser
 };
