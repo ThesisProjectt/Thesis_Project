@@ -53,7 +53,7 @@ const Forget = ({ navigation }) => {
         password: password,
       };
       if (isValidated) {
-        await axios.put("http://192.168.100.3:3000/client/newpwd", data);
+        await axios.put("http://192.168.104.28:3000/client/newpwd", data);
         console.log("done");
         navigation.navigate("NewPwd");
       }

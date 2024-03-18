@@ -61,11 +61,21 @@ const findImgClient = (id) => {
   return  Client.findOne({where:{id}})
 }
 
+const getOneClient = (id) => {
+  return Client.findByPk(id)
+}
+
+const update = (id, data) => {
+  return Client.update(data, {where: {id}} )
+}
+
 module.exports = {
   Client ,
   getClient, 
   addClient, 
   findOneClient, 
   changePass,
-  findImgClient
+  findImgClient,
+  getOneClient,
+  update
 };

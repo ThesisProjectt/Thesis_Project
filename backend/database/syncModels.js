@@ -41,4 +41,4 @@ Request.hasOne(Payment, {foreignKey:"request_id"});
 
 Employee.hasMany(Presence, {foreignKey: "employee_id"});
 
-sequelize.sync()
+sequelize.sync({alter:true})

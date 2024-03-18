@@ -3,6 +3,7 @@ import Carousel,{Pagination} from 'react-native-snap-carousel'
 import { useState,useRef,useEffect} from "react";
 import axios from 'axios'
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import Loading from "../components/Loading";
 export  const Slider_Width=Dimensions.get('window').width+40
 export const Item_Width=Math.round(Slider_Width*0.8)
 
@@ -11,7 +12,8 @@ export const Item_Width=Math.round(Slider_Width*0.8)
 export default  Carouss = ({navigation,route}) =>{
   const {catid} =route.params
 console.log("packsssssss",catid)
-// console.log("name",catName)
+const [loading,setLoading]=useState(false)
+
 
 
 
@@ -20,11 +22,12 @@ const [total,setTotal]=useState(0)
 
       const fetchPacks = async (id) => {
         try {
-         
-      const response = await fetch(`http://192.168.100.3:3000/pack/get/${id}`)
+          setLoading(true)
+      const response = await fetch(`http://192.168.104.28:3000/pack/get/${id}`)
         const data = await response.json()
         console.log(data)
         setPacks(data)
+        setLoading(false)
         }
         catch(error){console.error("error fetching error",error)
       
@@ -82,7 +85,7 @@ useEffect(()=>{
                    
 
 <Text style={{width:320,backgroundColor:"#008BEA",textAlign:"center",color:"white",fontSize:22,borderRadius:16,height:40,fontFamily:"Poppins-Regular"}}
-onPress={()=>{navigation.navigate("Payment")}}> Purchase </Text>
+onPress={()=>{navigation.navigate("Request"),{pack_id:packid}}}> Purchase </Text>
  
                     </View>
                     

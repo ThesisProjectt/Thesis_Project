@@ -1,20 +1,23 @@
 import React, { useState,useEffect } from "react";
 import { View,Image,Text,StyleSheet,FlatList,Pressable,StatusBar,TouchableOpacity  } from "react-native";
 import { AntDesign } from '@expo/vector-icons';
-
+import Loading  from "../components/Loading";
 
 export default function Catego({navigation}) {
   const [categories,setCategories]=useState([])
   const  [packs,setPacks]=useState([])
-
+const [loading,setLoading]=useState(false)
   
   const fetchCategories = async () => {
     try {
-  const response = await fetch(`http://192.168.100.3:3000/category/getCategories`)
+      setLoading(true)
+  const response = await fetch(`http://192.168.104.28:3000/category/getCategories`)
     const data = await response.json()
     setCategories(data)
+    setLoading(false)
     }
     catch(error){console.error("error fetching error",error)
+   
    }
   }
 
@@ -26,6 +29,9 @@ export default function Catego({navigation}) {
 
   return (
     <View style={styles.container}>
+      {loading ? (<Loading/>) : (
+
+      
     <FlatList
       data={categories}
       numColumns={2}
@@ -49,6 +55,7 @@ export default function Catego({navigation}) {
       }}
       keyExtractor={(item) => item.id}
     />
+    )}
   </View>
 
   )

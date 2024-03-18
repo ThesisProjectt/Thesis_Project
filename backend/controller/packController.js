@@ -43,6 +43,14 @@ module.exports = {
         }
         catch(error){console.log("error")}
     },
+
+    deletePackk :async (req,res)=>{
+      try {
+        const deleted = db.Pack.destroy({where:{name:req.params.name}})
+        res.json(deleted)
+      }
+      catch(error){res.json(error)}
+    },
     find: async(req,res)=>{
       try {
         const found = await db.Pack.findAll({

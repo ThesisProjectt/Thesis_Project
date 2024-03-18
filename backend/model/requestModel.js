@@ -5,6 +5,7 @@ const Request = sequelize.define('Request', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
+    autoIncrement: true
   },
   start: {
     type: DataTypes.DATE,

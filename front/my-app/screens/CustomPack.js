@@ -15,7 +15,7 @@ export default CustomPack = ({route}) =>{
       const fetchPacks = async (id) => {
 
         try {
-      const response = await fetch(`http://192.168.100.3:3000/pack/get/${id}`)
+      const response = await fetch(`http://192.168.104.28:3000/pack/get/${id}`)
         const data = await response.json()
         const packid = await AsyncStorage.getItem("packid")
         .then ((res)=>{console.log(res,"res"),setIdPack(res)}) 
@@ -53,10 +53,10 @@ console.log(idpack,"idpack")
                             {console.log(elemeent.id,idpack,"compare")}
                           
                              return (
-                            <View key={index}> 
+                            <View key={index} style={{display:"flex",flexDirection:"row",marginTop:4}}> 
                                      <Text style={{fontSize:18,color:"white",fontWeight:"bold",padding:4}}> {item.name}</Text>
-                                     <Text style={{fontSize:18,color:"white",fontWeight:"bold",padding:4}}> {item.price}</Text>
-                                     <Text style={{fontSize:18,color:"white",fontWeight:"bold",padding:4}}> {item?.PackHasServices?.quantity}</Text>
+                                     <Text style={{fontSize:18,color:"white",fontWeight:"bold",padding:4,marginLeft:"auto"}}> Price : {item.price}</Text>
+                                     {/* <Text style={{fontSize:18,color:"white",fontWeight:"bold",padding:4}}> {item?.PackHasServices?.quantity}</Text> */}
                             </View>
                              )
                         })}
@@ -70,7 +70,9 @@ console.log(idpack,"idpack")
                     )}
                 })}
                 <View style={{backgroundColor:"midnightblue",width:320, borderRadius:14,padding:2,marginTop:16,height:40}}>
-                        <Text style={{color:"white",fontSize:22,fontWeight:"bold",textAlign:"center"}}> Purchase </Text>
+                        <Text style={{color:"white",fontSize:22,fontWeight:"bold",textAlign:"center"}}
+                        onPress={()=>{navigation.navigate("Request"),{pack_id:packid}}}
+                        > Purchase </Text>
                     </View>
             </View> 
        

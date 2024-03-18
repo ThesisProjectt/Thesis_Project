@@ -9,15 +9,18 @@ import {
   TouchableOpacity,
   ScrollView,
   StatusBar,
+  Dimensions,
 } from "react-native";
-import homepage from "../assets/homepage 1.png";
+import homepage from "../assets/homepage 1-1.png";
 import homepage2 from "../assets/50%off.png";
 import imageData from "../functions/Categories";
 
 const HomePage = ({navigation}) => {
 
-  const Item = ({ image, title }) => (
-    <TouchableOpacity activeOpacity={0.8} onPress={()=>navigation.navigate("About Us")} style={styles.item}>
+  const Item = ({ image, title,id }) => (
+    <TouchableOpacity activeOpacity={0.8} onPress={()=>{navigation.navigate("Carouss",{catid:id,catName:title})}}
+    
+    style={styles.item}>
       <View style={styles.card}>
         <Image source={image} style={styles.flatImage} />
       </View>
@@ -29,8 +32,8 @@ const HomePage = ({navigation}) => {
 
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
-      <View className="items-center">
-        <Image source={homepage} className="w-full" style={styles.image} />
+      <View className="items-center justify-center">
+        <Image source={homepage} style={styles.image} />
       </View>
       <View className="flex-1 flex-row justify-between pl-4 pr-4 pt-5">
         <Text
@@ -55,7 +58,7 @@ const HomePage = ({navigation}) => {
           alwaysBounceHorizontal
           data={imageData}
           renderItem={({ item }) => (
-            <Item image={item.image} title={item.title} />
+            <Item image={item.image} title={item.name} id= {item.id}/>
           )}
           keyExtractor={(item) => item.id}
         />
@@ -67,7 +70,7 @@ const HomePage = ({navigation}) => {
         Special Offer
       </Text>
       <View className=" -mt-9 items-center">
-        <Image source={homepage2} className="w-full" style={styles.image2} />
+        <Image source={homepage2} style={styles.image2} />
       </View>
       <View style={{ height: 100, backgroundColor: "#EFFFFD" }}></View>
     </ScrollView>
@@ -78,7 +81,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#EFFFFD",
     paddingTop: StatusBar.currentHeight,
-    paddingHorizontal: 15,
+    // paddingHorizontal: 15,
     zIndex:1
   },
   item: {
@@ -89,12 +92,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   image: {
-    height: 230,
+    height: 240,
+    width: Dimensions.get("screen").width
   },
   image2: {
     marginTop: 50,
-    height: 175,
+    height: 180,
     borderRadius: 16,
+    width: Dimensions.get("screen").width-20,
   },
   card: {
     justifyContent: "center",

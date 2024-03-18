@@ -7,5 +7,6 @@ router.get('/get/:id',packRoute.find)
 router.post('/addPack',packRoute.add)
 router.put('/updatePack/:id',packRoute.updatePack)
 router.delete('/deletePack/:id',packRoute.deletePack)
+router.delete('/deletePackk/:name',packRoute.deletePackk)
 
 module.exports = router

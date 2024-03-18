@@ -14,26 +14,27 @@ console.log(catid,"from creation")
 
     const[services,setServices]=useState([])
     const[packs,setPacks]=useState([])
-    const[quantity,setQuantity]=useState('')
+    const[quantity,setQuantity]=useState('1')
     const [checked, setChecked] = useState(false);
    
    
-      // const fetchServices = async (id) => {
-      //   try {
-      // const response = await fetch(`http://192.168.100.3:3000/services/getServicebycategory/${id}`)
-      //   const data = await response.json()
-      //   console.log(data)
-      //   setServices(data)
-      //   }
-      //   catch(error){console.error("error fetching error",error)
+      const fetchServices = async (id) => {
+        try {
+      const response = await fetch(`http://192.168.104.28:3000/services/getServicebycategory/${id}`)
+        const data = await response.json()
+        console.log(data)
+        setServices(data)
+        }
+        catch(error){console.error("error fetching error",error)
       
-      // }
-      // }
+      }
+      }
 
 
     const myservices =()=>{
       packs?.map((item)=>{
        setServices(item.Services)
+       console.log(item.Services,"items")
           
         
       })
@@ -45,7 +46,7 @@ console.log(catid,"from creation")
       const fetchPacks = async (id) => {
         try {
          
-      const response = await fetch(`http://192.168.100.3:3000/pack/get/${id}`)
+      const response = await fetch(`http://192.168.104.28:3000/pack/get/${id}`)
         const data = await response.json()
         console.log(data)
         setPacks(data)
@@ -63,19 +64,29 @@ console.log(catid,"from creation")
         quantity:quantity,
         total:element.price*quantity
       }
-        axios.post("http://192.168.100.3:3000/packhasservice/addAPack",obj)
+        axios.post("http://192.168.104.28:3000/packhasservice/addAPack",obj)
         .then((res)=>{console.log("added")})  
         .catch((error)=>{console.log(error,"error")})
     }
 
 useEffect(()=>{
   fetchPacks(catid)
-  // fetchServices(catid)
-  myservices()
+  fetchServices(catid)
+  // myservices()
       
 },[])
 
 
+
+const deleteFromPack = async (element) => {
+  const obj = {
+    pack_id:packid,
+    service_id:element.id,
+  }
+  axios.delete(`http://192.168.104.28:3000/packhasservice/deleteFromPack`,obj)
+  .then((res)=>{console.log("deleted")})  
+        .catch((error)=>{console.log(error,"error")})
+}
 
 
 
@@ -91,20 +102,21 @@ useEffect(()=>{
         <View key={index} className=" flex-row items-center mb-4 ">
 <View  className="w-10 h-10 bg-white rounded-lg shadow mr-2 flex items-center justify-center"> 
 <Image className="w-8 h-8 rounded" source={{uri:element.image}}  />
-{console.log(element?.PackHasServices?.quantity)}
-{console.log(element)}  
+{/* {console.log(element?.PackHasServices?.quantity)}
+{console.log(element,"element")}   */}
   
 </View>
     
 
-    <View className="w-60  h-10 bg-white rounded-lg shadow flex  flex-row justify-center items-center"> 
+    <View className="w-60  h-10 bg-white rounded-lg shadow flex  flex-row justify-start items-center"> 
     <Text className="text-blue-800  bg-white font-bold ml-2 mt-2.5">{element.name} </Text>
-    <Text className="text-blue-800  bg-white font-bold ml-2 mt-2.5">{element.price*element?.PackHasServices?.quantity}</Text>
+    <Text className="text-blue-800  bg-white font-bold ml-auto mt-2.5 ">{element.price*quantity}</Text>
+    {/* <Text className="text-blue-800  bg-white font-bold ml-2 mt-2.5">{element.price*element?.PackHasServices?.quantity}</Text> */}
         
-        <View className="ml-auto flex flex-row items-center mr-2"> 
-        <Pressable className="w-4 h-4 bg-gray-100 rounded shadow" onPress={()=>{setQuantity((element?.PackHasServices?.quantity)+1)}}><Text className="text-sky-900 text-xs text-center font-medium">+</Text></Pressable>
+        {/* <View className="ml-auto flex flex-row items-center mr-2"> 
+        <Pressable className="w-4 h-4 bg-gray-100 rounded shadow" onPress={()=>{setQuantity((quantity)+1)}}><Text className="text-sky-900 text-xs text-center font-medium">+</Text></Pressable>
         <TextInput 
-        Number 
+        Number  
         
         keyboardType="number-pad"  
         
@@ -112,12 +124,15 @@ useEffect(()=>{
         onChangeText={setQuantity}
         className="w-3 ml-2 mr-2"
         />
-       <Pressable className="w-4 h-4 bg-gray-100 rounded shadow" onPress={()=>{setQuantity(element?.PackHasServices?.quantity-1)}}><Text className="text-sky-900 text-xs font-medium  text-center">-</Text></Pressable>
-        </View>
+       <Pressable className="w-4 h-4 bg-gray-100 rounded shadow" onPress={()=>{setQuantity(quantity-1)}}><Text className="text-sky-900 text-xs font-medium  text-center">-</Text></Pressable>
+        </View> */}
        
     </View>
 
-        <View className="w-10 h-10 bg-white rounded-lg shadow ml-2" > 
+        <View className="w-12 h-10 bg-white rounded-lg shadow ml-2" > 
+
+        
+
         <Button title="add" onPress={() => {createCustom(element)}} />
         
         {/* <Checkbox   status={checked ? 'checked' : 'unchecked'}  onPress={() => {createCustom({

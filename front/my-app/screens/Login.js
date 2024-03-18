@@ -31,7 +31,7 @@ const Login = ({ navigation }) => {
     const data = { email: email, password: password };
     try {
       setLoading(true);
-      await axios.post("http://192.168.100.3:3000/client/login", data)
+      await axios.post("http://192.168.104.28:3000/client/login", data)
         .then(async (response) => {
           setError(null);
           const token = response.headers["token"];

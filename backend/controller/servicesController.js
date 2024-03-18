@@ -50,20 +50,6 @@ module.exports = {
         }
         catch(error){console.log("error")}
     },
-    find: async(req,res)=>{
-      try{
-        const found = await db.Service.findAll({ where: {
-          category_id: req.params.id
-        },include: {
-          model: PackHasServices,
-         
-      },
-          
-          
-      })
-         res.json(found)
-      }
-      catch(error){console.log(error)}
-    },
+   
 }
 

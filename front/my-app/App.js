@@ -23,6 +23,9 @@ import AboutStyle from './components/styles/AboutStyle';
 import Chat from './screens/Chat';
 import CustomPack from './screens/CustomPack';
 import Payment from './screens/Payment'
+import Request from './screens/Request';
+import RequestStyle from './components/styles/RequestStyle';
+
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -54,6 +57,7 @@ export default function App() {
         <Stack.Screen name="Chat" component={Chat} option={{headerShown:false}}/>
         <Stack.Screen name='CustomPack' component={CustomPack} options={AboutStyle}/>
         <Stack.Screen name='Payment' component={Payment} options={{headerShown:false}}/>
+        <Stack.Screen name='Request' component={Request} options={RequestStyle}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
