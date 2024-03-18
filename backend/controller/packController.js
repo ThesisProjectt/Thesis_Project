@@ -49,7 +49,7 @@ module.exports = {
           include: [{
             model: Service,
             where:{category_id:req.params.id},
-            through:{attributes:[]},
+            // through:{attributes:[]},
           }]
         })
         res.json(found)

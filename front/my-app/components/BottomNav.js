@@ -8,7 +8,7 @@ import Profile from './styles/ProfileStyle';
 import Cart from './styles/CartStyle';
 import Notification from './styles/NotificationStyle';
 import Chat from './styles/ChatStyle';
-
+import Chatt from '../screens/Chat';
 const Tab = createBottomTabNavigator();
 
 function BottomNav() {
@@ -19,7 +19,7 @@ function BottomNav() {
       <Tab.Screen name="Categories" component={Categories} options={Cart}/>
       <Tab.Screen name="Home" component={HomePage} options={Home}/>
       <Tab.Screen name="Notification" component={HomePage} options={Notification}/>
-      <Tab.Screen name="Chat" component={HomePage} options={Chat}/>
+      <Tab.Screen name="Chat" component={Chatt} options={Chat}/>
     </Tab.Navigator>
   );
 }

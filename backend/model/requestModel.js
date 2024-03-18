@@ -4,7 +4,7 @@ const sequelize = require('../database/index');
 const Request = sequelize.define('Request', {
   id: {
     type: DataTypes.INTEGER,
-    primaryKey: true
+    primaryKey: true,
   },
   start: {
     type: DataTypes.DATE,

@@ -1,3 +1,4 @@
+
 import * as React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { useRef } from 'react';
@@ -19,7 +20,9 @@ import BottomNav from './components/BottomNav';
 import Loading from './components/Loading';
 import About from './screens/About';
 import AboutStyle from './components/styles/AboutStyle';
-
+import Chat from './screens/Chat';
+import CustomPack from './screens/CustomPack';
+import Payment from './screens/Payment'
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -36,6 +39,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator >
 
+        
         <Stack.Screen name='FirstScreen' component={FirstScreen} options={{headerShown:false}}/>
         <Stack.Screen name='Categories' component={Catego} options={{headerShown:false}}/> 
         <Stack.Screen name="Carouss" component={Carouss} options={{headerShown:false}} />       
@@ -47,22 +51,13 @@ export default function App() {
         <Stack.Screen name="CreateCustom" component={CreateCustom}/>
         <Stack.Screen name='Loading' component={Loading} options={{headerShown:false}}/>
         <Stack.Screen name='About Us' component={About} options={AboutStyle}/>
+        <Stack.Screen name="Chat" component={Chat} option={{headerShown:false}}/>
+        <Stack.Screen name='CustomPack' component={CustomPack} options={AboutStyle}/>
+        <Stack.Screen name='Payment' component={Payment} options={{headerShown:false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  pager: {
-    flex: 1,
-    alignSelf: "stretch"
-  }
-});
 
 

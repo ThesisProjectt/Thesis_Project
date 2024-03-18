@@ -8,6 +8,7 @@ router.post('/addAPack',packhasRoute.add)
 // router.put('/updateThisPack/:id',packhasRoute.updateThisPack)
 router.put('/updateThisPack',packhasRoute.updateService)
 router.delete('/deleteThisPack/:id',packhasRoute.deleteThisPack)
+router.delete('/deleteThisPack/:id0/:id1',packhasRoute.deleteThisPack)
 router.delete('/deleteFromPack',packhasRoute.deleteFromPack)
 
 module.exports = router

@@ -45,7 +45,7 @@ module.exports = {
 },
     deleteThisPack: async(req,res)=>{
         try {
-            const deleted=await db.PackHasServices.destroy({where:{pack_id:req.params.id}})
+            const deleted=await db.PackHasServices.destroy({where:{pack_id:req.params.id0,service_id:req.params.id1}})
             res.json(deleted)
         }
         catch(error){console.log("error")}

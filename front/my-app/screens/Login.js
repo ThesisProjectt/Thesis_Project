@@ -23,14 +23,15 @@ const Login = ({ navigation }) => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-
+ 
   const handleSubmit = async () => {
     if (!email || !password) {
       return setError("Please enter both email and password");
     }
     const data = { email: email, password: password };
     try {
-      await axios.post("http://192.168.104.31:3000/client/login", data)
+      setLoading(true);
+      await axios.post("http://192.168.100.3:3000/client/login", data)
         .then(async (response) => {
           setError(null);
           const token = response.headers["token"];

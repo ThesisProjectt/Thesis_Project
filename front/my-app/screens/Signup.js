@@ -63,7 +63,7 @@ const Signup = ({ navigation }) => {
         password: password,
       };
       if (isValidated) {
-        await axios.post("http://192.168.104.31:3000/client/signup", data)
+        await axios.post("http://192.168.100.3:3000/client/signup", data)
         console.log('done')
         navigation.replace("Login")
       }

@@ -2,7 +2,7 @@ import Avatar from "../Avatar";
 import { Ionicons } from "@expo/vector-icons";
 
 export default Cart = {
-  headerShown: false,
+  headerShown: true,
   headerTitleAlign: "center",
   headerLeft: () => (
     <Ionicons
