@@ -15,12 +15,13 @@ import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Loading from "../components/Loading";
 
-const Request = ({ navigation }) => {
+const Request = ({ navigation,route}) => {
+  const {packid} = route.params
   const [selected, setSelected] = useState("");
   const [region, setRegion] = useState({});
   const [mark, setMark] = useState(false);
   const [loading, setLoading] = useState(false);
-
+console.log(packid)
   const onRegionChange = (regions) => {
     const localisation = {
       latitude: regions.nativeEvent.coordinate.latitude,
@@ -55,8 +56,8 @@ const Request = ({ navigation }) => {
           longitude: region.longitude,
         };
         const data = { start: selected, pack_id: 1, client_id: user.id };
-        await axios.put(`http://192.168.104.28:3000/client/update/${user.id}`,localData);
-        await axios.post(`http://192.168.104.28:3000/request/postrequest`, data);
+        await axios.put(`http://192.168.104.10:3000/client/update/${user.id}`,localData);
+        await axios.post(`http://192.168.104.10:3000/request/postrequest`, data);
         ToastAndroid.show('Request sent successfully!', ToastAndroid.BOTTOM);
         navigation.navigate("Home");
       } catch (err) {
@@ -69,7 +70,7 @@ const Request = ({ navigation }) => {
   useEffect(() => {
     (async () => {
       const user = JSON.parse(await AsyncStorage.getItem("user"));
-      axios(`http://192.168.104.28:3000/client/profile/${user.id}`)
+      axios(`http://192.168.104.10:3000/client/profile/${user.id}`)
         .then((result) => {
           if (result.data.longitude && result.data.latitude) {
             setRegion({

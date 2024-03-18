@@ -2,7 +2,7 @@ import io from "socket.io-client";
 import { View,Text,StyleSheet, TextInput, Button,Image } from 'react-native'
 import {useState} from 'react'
 import Message from './Message'
-const socket = io.connect("http://192.168.104.28:3001");
+const socket = io.connect("http://192.168.104.10:3001");
 export default Chatt =()=>{
     const [username, setUsername] = useState("");
     const [room, setRoom] = useState("");

@@ -11,7 +11,7 @@ const [loading,setLoading]=useState(false)
   const fetchCategories = async () => {
     try {
       setLoading(true)
-  const response = await fetch(`http://192.168.104.28:3000/category/getCategories`)
+  const response = await fetch(`http://192.168.104.10:3000/category/getCategories`)
     const data = await response.json()
     setCategories(data)
     setLoading(false)

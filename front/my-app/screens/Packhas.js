@@ -38,7 +38,7 @@ const [total,setTotal]=useState(0)
         const user = JSON.parse(await AsyncStorage.getItem("user"));
 
         const data = {name:"Custom Pack",status:"ClientPack",client_id:user.id} 
-          axios.post("http://192.168.100.3:3000/pack/addPack",data)
+          axios.post("http://192.168.104.28:3000/pack/addPack",data)
           .then(async (res)=>{console.log(res.data)
        await AsyncStorage.setItem("packid",JSON.stringify(res.data.id))
           })
@@ -72,10 +72,10 @@ useEffect(()=>{
                     <Text className="font-bold text-xl text-left h-8 mt-2 text-blue-400 " > {item.name} </Text>
                     <Text className=" text-lg font-bold text-blue-400" >  Total : {(item?.Services.reduce((total,element)=>  (total+element.price),0))}  </Text>
                     </View> 
-                    <View className="p-4">
+                    <View className="p-1">
                 {item.Services.map((ele,index)=> {return (      
                                 <View key={index}> 
-                                <Text className="text-white text-lg font-bold" style={{fontFamily:"Poppins-Regular"}}>  {`\u2022 ${ele.description}`}    </Text>
+                                <Text className="text-white text-lg font-bold" style={{fontFamily:"Poppins-Regular"}}>  {`\u2022 ${ele.name}`}    </Text>
                                 <Text className="text-white text-lg font-bold" style={{fontFamily:"Poppins-Regular"}}>  {ele.PackHasServices.quantity==null?'':`\u2022 ${ele.PackHasServices.quantity}`}    </Text>
                                  </View>
                               )})}
@@ -85,7 +85,7 @@ useEffect(()=>{
                    
 
 <Text style={{width:320,backgroundColor:"#008BEA",textAlign:"center",color:"white",fontSize:22,borderRadius:16,height:40,fontFamily:"Poppins-Regular"}}
-onPress={()=>{navigation.navigate("Request"),{pack_id:packid}}}> Purchase </Text>
+onPress={()=>{navigation.navigate("Request",{packid:item.id})}}> Purchase </Text>
  
                     </View>
                     

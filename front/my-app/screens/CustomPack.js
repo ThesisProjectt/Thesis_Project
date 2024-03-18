@@ -3,7 +3,7 @@ import { useState,useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
-export default CustomPack = ({route}) =>{
+export default CustomPack = ({route,navigation}) =>{
     const [packs,setPacks]=useState([])
     const [idpack,setIdPack]=useState('')
     const {catid} =route.params

@@ -11,7 +11,7 @@ export default function Avatar() {
     (async () => {
       const user = JSON.parse(await AsyncStorage.getItem("user"));
       try {
-        await axios(`http://192.168.104.28:3000/client/getimg/${user.id}`)
+        await axios(`http://192.168.104.10:3000/client/getimg/${user.id}`)
         .then((res) => {
             setImage(res.data)
           })
